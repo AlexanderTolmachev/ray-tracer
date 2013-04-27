@@ -40,6 +40,9 @@
     <Filter Include="Header Files\Camera">
       <UniqueIdentifier>{48f9924e-6b6f-494f-bfdf-c02b51749b3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Light">
+      <UniqueIdentifier>{25083030-d260-4c89-a823-a5f4ae13af83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="..\src\sceneloader.cpp">
       <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\lightsource.cpp">
+      <Filter>Source Files\Light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
