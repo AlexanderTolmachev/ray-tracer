@@ -1,14 +1,14 @@
 /*!
  *\file raytracer.cpp
- *\brief Contains RayTracer definition
+ *\brief Contains RayTracer class definition
  */
 
 #include "raytracer.h"
 
 void RayTracer::renderScene(const Scene& scene) {
-	// TODO implement
+  // TODO implement
 }
 
 void RayTracer::saveRenderedImageToFile(const QString& filePath) {
-	// TODO implement
+  // TODO implement
 }

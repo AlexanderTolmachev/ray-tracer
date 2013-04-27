@@ -58,7 +58,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\..\src\;.\..\lib\vmath-0.10\src;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;.;.\..\build\GeneratedFiles\$(ConfigurationName);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\src;.\..\lib\vmath-0.10\src;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;.;.\..\build\GeneratedFiles\$(ConfigurationName);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_CORE_LIB;QT_XML_LIB;QT_GUI_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -74,7 +74,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>.\..\src\;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtXml;.;.\..\build\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\src;.\..\lib\vmath-0.10\src;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtXml;.;.\..\build\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_NO_DEBUG;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -93,6 +93,7 @@
     <ClCompile Include="..\src\sceneloader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\camera.h" />
     <ClInclude Include="..\src\lightsource.h" />
     <ClInclude Include="..\src\material.h" />
     <ClInclude Include="..\src\ray.h" />

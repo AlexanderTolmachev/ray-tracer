@@ -1,6 +1,6 @@
 /*!
  *\file scene.h
- *\brief Contains Scene declaration
+ *\brief Contains Scene class declaration
  */
 
 #pragma once
@@ -11,19 +11,20 @@
 #include "shape.h"
 #include "lightsource.h"
 #include "material.h"
+#include "camera.h"
 
 class Scene;
 
 typedef QSharedPointer<Scene> ScenePointer;
 
 class Scene {
-	public:
-		Scene() {}
-		virtual ~Scene() {}
+  public:
+    Scene();
+    virtual ~Scene();
 
-	private:
-		std::vector<Shape *> mShapes;
-		std::vector<LightSource *> mLightSources;
-		MaterialPointer mBackgroundMaterial;
-		
+  private:
+    std::vector<ShapePointer> mShapes;
+    std::vector<LightSourcePointer> mLightSources;
+    MaterialPointer mBackgroundMaterial;
+    CameraPointer mCamera;
 };
