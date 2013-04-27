@@ -93,9 +93,12 @@
     <ClCompile Include="..\src\sceneloader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\lightsource.h" />
+    <ClInclude Include="..\src\material.h" />
     <ClInclude Include="..\src\raytracer.h" />
     <ClInclude Include="..\src\scene.h" />
     <ClInclude Include="..\src\sceneloader.h" />
+    <ClInclude Include="..\src\shape.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
