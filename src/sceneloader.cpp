@@ -7,4 +7,5 @@
 
 ScenePointer SceneLoader::loadScene(const QString &filePath) {
 // TODO implement
+	return ScenePointer(NULL);
 }

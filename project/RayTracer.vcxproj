@@ -58,7 +58,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.\..\src\;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtXml;.;.\..\build\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\..\src\;.\..\lib\vmath-0.10\src;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;.;.\..\build\GeneratedFiles\$(ConfigurationName);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_CORE_LIB;QT_XML_LIB;QT_GUI_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -95,10 +95,13 @@
   <ItemGroup>
     <ClInclude Include="..\src\lightsource.h" />
     <ClInclude Include="..\src\material.h" />
+    <ClInclude Include="..\src\ray.h" />
+    <ClInclude Include="..\src\rayintersection.h" />
     <ClInclude Include="..\src\raytracer.h" />
     <ClInclude Include="..\src\scene.h" />
     <ClInclude Include="..\src\sceneloader.h" />
     <ClInclude Include="..\src\shape.h" />
+    <ClInclude Include="..\src\types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

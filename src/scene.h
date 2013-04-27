@@ -6,6 +6,11 @@
 #pragma once
 
 #include <QSharedPointer>
+#include <vector>
+
+#include "shape.h"
+#include "lightsource.h"
+#include "material.h"
 
 class Scene;
 
@@ -16,4 +21,9 @@ class Scene {
 		Scene() {}
 		virtual ~Scene() {}
 
+	private:
+		std::vector<Shape *> mShapes;
+		std::vector<LightSource *> mLightSources;
+		MaterialPointer mBackgroundMaterial;
+		
 };

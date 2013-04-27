@@ -31,6 +31,9 @@
     <Filter Include="Header Files\Light">
       <UniqueIdentifier>{6be896cc-af41-4817-9a72-0077de84e1cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Common">
+      <UniqueIdentifier>{472e9a60-a566-403f-889b-c299e24f15c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -64,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="..\src\lightsource.h">
       <Filter>Header Files\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\types.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ray.h">
+      <Filter>Header Files\Tracing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\rayintersection.h">
+      <Filter>Header Files\Tracing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
