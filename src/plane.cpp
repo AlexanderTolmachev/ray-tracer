@@ -5,7 +5,7 @@
 
 #include "plane.h"
 
-Plane::Plane(MaterialPointer material, const Vector &normal, float distance) 
+Plane::Plane(const Vector &normal, float distance, MaterialPointer material) 
   : Shape(material),
     mNormal(normal),
     mDistance(distance) {}

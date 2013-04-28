@@ -73,8 +73,12 @@ ScenePointer SceneLoader::readScene(const QDomNode &rootNode) const {
       }
       scene->addLightSource(lightSource);
     } else if (elementTagName == "object") {
-
-
+      ShapePointer shape = readShape(element);
+      if (shape == NULL) {
+        std::cerr << "Scene parsing error: failed shape parameters reading" << std::endl;
+        return ScenePointer(NULL);
+      }
+      scene->addShape(shape);
     } else if (elementTagName == "background") {
       if (isBackgroundMaterialInitialized) {
         std::cerr << "Scene parsing error: 'background' tag occurred twice" << std::endl;
@@ -198,6 +202,35 @@ bool SceneLoader::readLightSourceType(const QDomElement &element, LightSourceTyp
 
   std::cerr << "Scene parsing error: unknown light source type '" << sourceType.toUtf8().constData() << "'" << std::endl;
   return false;
+}
+
+ShapePointer SceneLoader::readShape(const QDomElement &element) const {
+  QString shapeType;
+  if (!readAttributeAsString(element, "type", shapeType)) {
+    return ShapePointer(NULL);
+  }
+
+  MaterialPointer shapeMaterial = readMaterial(element);
+  if (shapeMaterial == NULL) {
+    return ShapePointer(NULL);
+  }
+
+  if (shapeType == "plane") {
+    return readPlane(element, shapeMaterial);
+  }
+  // TODO process others
+}
+
+PlanePointer SceneLoader::readPlane(const QDomElement &element, MaterialPointer material) const {
+  Vector normal;
+  float distance;
+
+  if (readChildElementAsVector(element, "normal", normal) && 
+      readChildElementAsFloat(element, "D", "d", distance)) {
+    return PlanePointer(new Plane(normal, distance, material));
+  }
+
+  return PlanePointer(NULL);
 }
 
 MaterialPointer SceneLoader::readMaterial(const QDomElement &element) const {

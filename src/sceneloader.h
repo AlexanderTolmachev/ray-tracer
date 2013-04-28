@@ -8,6 +8,7 @@
 #include <QDomDocument>
 
 #include "scene.h"
+#include "plane.h"
 
 class SceneLoader {
   public:
@@ -23,6 +24,8 @@ class SceneLoader {
     LightSourcePointer readLightSource(const QDomElement &element) const;
     ShapePointer readShape(const QDomElement &element) const;
     MaterialPointer readMaterial(const QDomElement &element) const;
+
+    PlanePointer readPlane(const QDomElement &element, MaterialPointer material) const;
 
     bool readLightSourceType(const QDomElement &element, LightSourceType &lightSourceType) const;
     bool readVector(const QDomElement &element, Vector &vector) const;
