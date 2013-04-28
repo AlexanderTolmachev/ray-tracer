@@ -13,17 +13,18 @@ struct Material;
 
 typedef QSharedPointer<Material> MaterialPointer;
 
-struct Material {
+struct Material {  
   // Color properties as described by Phong model
   Color ambientColor;
   Color diffuseColor;
   Color specularColor;
   Color emissiveColor;
-  float specularPower;
 
-  // Material properties
-  float	refractionCoefficient;
-  float	reflectionCoefficient;
-  float	densityCoefficient;
-  float	illuminationCoefficient;
+  float specularPower;
+  float	densityFactor;
+
+  // Illumination factors
+  float	illuminationFactor;
+  float	reflectionFactor;
+  float	refractionFactor;
 };

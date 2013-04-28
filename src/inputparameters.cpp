@@ -62,13 +62,16 @@ InputParametersPointer InputParametersParser::parseInputParameters(QStringList a
   if (!isSceneParameterInitialized) {
     std::cerr << "Input arguments parse error: 'scene' argument is not specified" << std::endl;
     return InputParametersPointer(NULL);
-  } else if (!isOutputParameterInitialized) {
+  } 
+  if (!isOutputParameterInitialized) {
     std::cerr << "Input arguments parse error: 'output' argument is not specified" << std::endl;
     return InputParametersPointer(NULL);
-  } else if (!isXResolutionParameterInitialized) {
+  } 
+  if (!isXResolutionParameterInitialized) {
     std::cerr << "Input arguments parse error: 'resolution_x' argument is not specified" << std::endl;
     return InputParametersPointer(NULL);
-  } else if (!isYResolutionParameterInitialized) {
+  } 
+  if (!isYResolutionParameterInitialized) {
     std::cerr << "Input arguments parse error: 'resolution_y' argument is not specified" << std::endl;
     return InputParametersPointer(NULL);
   }

@@ -26,8 +26,8 @@ class Shape {
     Color getDiffuseColor() const  { return mMaterial->diffuseColor; }
     Color getSpecularColor() const { return mMaterial->specularColor; }
 
-    float getReflectionCoefficient() const { return mMaterial->reflectionCoefficient; }
-    float getRefractionCoefficient() const { return mMaterial->refractionCoefficient; }
+    float getReflectionFactor() const { return mMaterial->reflectionFactor; }
+    float getRefractionFactor() const { return mMaterial->refractionFactor; }
 
   private:
     MaterialPointer mMaterial;

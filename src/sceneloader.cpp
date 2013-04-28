@@ -72,7 +72,19 @@ ScenePointer SceneLoader::readScene(const QDomNode &rootNode) const {
 
 
     } else if (elementTagName == "background") {
+      if (isBackgroundMaterialInitialized) {
+        std::cerr << "Scene parsing error: 'background' tag occurred twice" << std::endl;
+        return ScenePointer(NULL);
+      }
 
+      MaterialPointer material = readMaterial(element);
+      if (material == NULL) {
+        std::cerr << "Scene parsing error: failed background material parameters reading" << std::endl;
+        return ScenePointer(NULL);
+      }
+
+      scene->setBackgroundMaterial(material);
+      isBackgroundMaterialInitialized = true;
     } else {
       std::cerr << "Scene parsing error: unknown tag '" << elementTagName.toUtf8().constData() << "'" << std::endl;
       return ScenePointer(NULL);
@@ -83,6 +95,10 @@ ScenePointer SceneLoader::readScene(const QDomNode &rootNode) const {
   
   if (!isCameraIntialized) {
     std::cerr << "Scene parsing error: camera parameters are not specified" << std::endl;
+    return ScenePointer(NULL);
+  }
+  if (!isBackgroundMaterialInitialized) {
+    std::cerr << "Scene parsing error: background material parameters are not specified" << std::endl;
     return ScenePointer(NULL);
   }
 
@@ -107,6 +123,29 @@ CameraPointer SceneLoader::readCamera(const QDomElement &element) const {
   return CameraPointer(NULL);
 }
 
+MaterialPointer SceneLoader::readMaterial(const QDomElement &element) const {
+  QDomElement materialElement = element.firstChildElement("material");
+  
+  if (materialElement.isNull()) {
+    std::cerr << "Scene parsing error: element '" << element.tagName().toUtf8().constData() << "' has no 'material' child element" << std::endl;
+    return MaterialPointer(NULL);
+  }
+  
+  MaterialPointer material = MaterialPointer(new Material());
+  if (readChildElementAsVector(materialElement, "ambient", material->ambientColor) &&
+      readChildElementAsVector(materialElement, "diffuse", material->diffuseColor) &&
+      readChildElementAsVector(materialElement, "specular", material->specularColor) &&
+      readChildElementAsFloat(materialElement, "specular_power", "power", material->specularPower) &&
+      readChildElementAsFloat(materialElement, "refraction_coeff", "theta", material->densityFactor) &&
+      readChildElementAsFloat(materialElement, "illumination_factors", "illumination_factor", material->illuminationFactor) &&
+      readChildElementAsFloat(materialElement, "illumination_factors", "reflection_factor", material->reflectionFactor) &&
+      readChildElementAsFloat(materialElement, "illumination_factors", "refraction_factor", material->refractionFactor)) {
+        return material;
+  }
+
+  return MaterialPointer(NULL);
+}
+
 bool SceneLoader::readVector(const QDomElement &element, Vector &vector) const {  
   if (readAttributeAsFloat(element, "x", vector.x) && 
       readAttributeAsFloat(element, "y", vector.y) && 
@@ -124,7 +163,7 @@ bool SceneLoader::readAttributeAsFloat(const QDomElement &element, const QString
     if (isConversionOk) {
       return true;
     } else {
-      std::cerr << "Scene parsing error: unable to convert '" << attributeName.toUtf8().constData() << "' of element '" << element.tagName().toUtf8().constData() << "' to float" << std::endl;
+      std::cerr << "Scene parsing error: unable to convert '" << attributeName.toUtf8().constData() << "' attribute of element '" << element.tagName().toUtf8().constData() << "' to float" << std::endl;
       return false;
     }
   }
