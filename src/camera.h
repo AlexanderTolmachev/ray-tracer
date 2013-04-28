@@ -17,11 +17,12 @@ typedef QSharedPointer<Camera> CameraPointer;
 class Camera {
   public:
     Camera(Vector position, Vector up, Vector lookAt, 
-           float fov, float nearPlaneDistance, 
-           int imagePlaneWidth, int imagePlaneHeight);
+           float fov, float nearPlaneDistance);
     virtual ~Camera();
 
     Ray emitRay(int x, int y) const;
+
+    void setImagePlaneResolution(int width, int height);
 
   private:
     // Camera position (eye) vector

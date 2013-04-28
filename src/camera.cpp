@@ -6,15 +6,12 @@
 #include "camera.h"
 
 Camera::Camera(Vector position, Vector up, Vector lookAt, 
-               float fov, float nearPlaneDistance, 
-               int imagePlaneWidth, int imagePlaneHeight) 
+               float fov, float nearPlaneDistance) 
   : mPosition(position),
     mUp(up),
     mLookAt(lookAt),
     mFov(fov),
-    mNearPlaneDistance(nearPlaneDistance),
-    mImagePlaneWidth(imagePlaneWidth),
-    mImagePlaneHeight(imagePlaneHeight) {
+    mNearPlaneDistance(nearPlaneDistance) {
   // TODO init other fields
 }
 
@@ -25,4 +22,10 @@ Ray Camera::emitRay(int x, int y) const {
   Ray ray;
   // TODO implement
   return ray;
+}
+
+void Camera::setImagePlaneResolution(int width, int height) {
+  mImagePlaneWidth = width;
+  mImagePlaneHeight = height;
+  mAspectRatio = static_cast<float>(mImagePlaneWidth) / mImagePlaneHeight;
 }

@@ -22,11 +22,14 @@ class Scene {
     Scene();
     virtual ~Scene();
 
-
+    void setCamera(CameraPointer camera);
+    void addLightSource(LightSourcePointer lightSource);
+    void addShape(ShapePointer shape);
+    void setBackgroundMaterial(MaterialPointer material);
 
   private:
-    std::vector<ShapePointer> mShapes;
-    std::vector<LightSourcePointer> mLightSources;
-    MaterialPointer mBackgroundMaterial;
     CameraPointer mCamera;
+    std::vector<LightSourcePointer> mLightSources;
+    std::vector<ShapePointer> mShapes;
+    MaterialPointer mBackgroundMaterial;
 };

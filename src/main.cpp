@@ -28,7 +28,17 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-  SceneLoader sceneLoader;  
+  std::cout << "Loading scene..." << std::endl; 
+
+  SceneLoader sceneLoader;
+  ScenePointer scene = sceneLoader.loadScene(inputParameters->sceneFilePath);
+  if (scene == NULL) {
+    std::cout << "Scene loading failed" << std::endl;
+    return -1;    
+  }
+
+  std::cout << "Loading scene finished" << std::endl; 
+
 }
 
 void printUsage() {
