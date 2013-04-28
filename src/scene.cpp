@@ -9,5 +9,4 @@ Scene::Scene()
   : mBackgroundMaterial(NULL) {}
 
 Scene::~Scene() {
-  // TODO delete items of lists
 }

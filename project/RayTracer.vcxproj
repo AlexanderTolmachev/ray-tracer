@@ -88,16 +88,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\camera.cpp" />
+    <ClCompile Include="..\src\inputparameters.cpp" />
     <ClCompile Include="..\src\lightsource.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\plane.cpp" />
     <ClCompile Include="..\src\raytracer.cpp" />
     <ClCompile Include="..\src\scene.cpp" />
     <ClCompile Include="..\src\sceneloader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\camera.h" />
+    <ClInclude Include="..\src\inputparameters.h" />
     <ClInclude Include="..\src\lightsource.h" />
     <ClInclude Include="..\src\material.h" />
+    <ClInclude Include="..\src\plane.h" />
     <ClInclude Include="..\src\ray.h" />
     <ClInclude Include="..\src\rayintersection.h" />
     <ClInclude Include="..\src\raytracer.h" />

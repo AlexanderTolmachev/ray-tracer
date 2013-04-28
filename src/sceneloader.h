@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <QDomDocument>
+
 #include "scene.h"
 
 class SceneLoader {
@@ -13,4 +15,7 @@ class SceneLoader {
     virtual ~SceneLoader() {}
 
     ScenePointer loadScene(const QString &filePath);
+  private:
+    bool read(const QDomNode &node, ScenePointer scene);
+
 };
