@@ -22,6 +22,8 @@ class Scene {
     Scene();
     virtual ~Scene();
 
+
+
   private:
     std::vector<ShapePointer> mShapes;
     std::vector<LightSourcePointer> mLightSources;
