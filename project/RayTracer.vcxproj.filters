@@ -43,6 +43,9 @@
     <Filter Include="Source Files\Light">
       <UniqueIdentifier>{25083030-d260-4c89-a823-a5f4ae13af83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Camera">
+      <UniqueIdentifier>{a4ad4880-bd92-41c6-b072-831c2ec95b3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -59,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="..\src\lightsource.cpp">
       <Filter>Source Files\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\camera.cpp">
+      <Filter>Source Files\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

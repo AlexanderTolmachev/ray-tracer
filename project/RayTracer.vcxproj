@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\camera.cpp" />
     <ClCompile Include="..\src\lightsource.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\raytracer.cpp" />
