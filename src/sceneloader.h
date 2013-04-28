@@ -24,8 +24,10 @@ class SceneLoader {
     ShapePointer readShape(const QDomElement &element) const;
     MaterialPointer readMaterial(const QDomElement &element) const;
 
+    bool readLightSourceType(const QDomElement &element, LightSourceType &lightSourceType) const;
     bool readVector(const QDomElement &element, Vector &vector) const;
     bool readAttributeAsFloat(const QDomElement &element, const QString &attributeName, float &value) const;
+    bool readAttributeAsString(const QDomElement &element, const QString &attributeName, QString &value) const;
     bool readChildElementAsVector(const QDomElement &element, const QString &childElementName, Vector &vector) const;
     bool readChildElementAsFloat(const QDomElement &element, const QString &childElementName, const QString &attributeName, float &value) const;
 };

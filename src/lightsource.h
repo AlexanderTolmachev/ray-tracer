@@ -24,6 +24,8 @@ enum LightSourceType
 };
 
 struct LightSource {
+  LightSource();
+
   Color calculateColor(const Scene &scene, ShapePointer shape, const Ray &ray, float distance, const Vector &normal) const;
 
   // Type of the light source
@@ -39,16 +41,16 @@ struct LightSource {
   Color	diffuseIntensity;
   Color specularIntensity;
 
-  // Attenuation coefficients
+  // Attenuation coefficients (for spot and point lights)
   float	constantAttenutaionCoefficient;
   float linearAttenutaionCoefficient;
   float quadraticAttenutaionCoefficient;
 
-  // Penumbra angle in radians (for spot light)
-  float	penumbraAngle;
-  // Umbra angle in radians (for spot ligh)
+  // Umbra angle (for spot ligh)
   float	umbraAngle;
-  // Falloff factor (for spotlight)
+  // Penumbra angle (for spot light)
+  float	penumbraAngle;
+  // Falloff factor (for spot light)
   float	falloffFactor;
 
   // Light range (for directional light)

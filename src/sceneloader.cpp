@@ -66,8 +66,12 @@ ScenePointer SceneLoader::readScene(const QDomNode &rootNode) const {
       scene->setCamera(camera);
       isCameraIntialized = true;
     } else if (elementTagName == "light") {
-
-
+      LightSourcePointer lightSource = readLightSource(element);
+      if (lightSource == NULL) {
+        std::cerr << "Scene parsing error: failed light source parameters reading" << std::endl;
+        return ScenePointer(NULL);
+      }
+      scene->addLightSource(lightSource);
     } else if (elementTagName == "object") {
 
 
@@ -123,6 +127,79 @@ CameraPointer SceneLoader::readCamera(const QDomElement &element) const {
   return CameraPointer(NULL);
 }
 
+LightSourcePointer SceneLoader::readLightSource(const QDomElement &element) const {
+  LightSourcePointer lightSource = LightSourcePointer(new LightSource());
+
+  if (!readLightSourceType(element, lightSource->type)) {
+    return LightSourcePointer(NULL);
+  }
+
+  if (lightSource->type == DIRECTIONAL || lightSource->type == SPOT) {
+    if (!readChildElementAsVector(element, "dir", lightSource->direction)) {
+      return LightSourcePointer(NULL);
+    }
+  }  
+  
+  if (lightSource->type == POINT || lightSource->type == SPOT) {
+    if (!readChildElementAsVector(element, "pos", lightSource->position)) {
+      return LightSourcePointer(NULL);
+    }   
+  }
+
+  if (!readChildElementAsVector(element, "ambient_emission", lightSource->ambientIntensity) ||
+      !readChildElementAsVector(element, "diffuse_emission", lightSource->diffuseIntensity) ||
+      !readChildElementAsVector(element, "specular_emission", lightSource->specularIntensity)) {
+    return LightSourcePointer(NULL);
+  }
+
+  if (lightSource->type == POINT || lightSource->type == SPOT) {
+    if (!readChildElementAsFloat(element, "attenuation", "const", lightSource->constantAttenutaionCoefficient) ||
+        !readChildElementAsFloat(element, "attenuation", "linear", lightSource->linearAttenutaionCoefficient) ||
+        !readChildElementAsFloat(element, "attenuation", "quad", lightSource->quadraticAttenutaionCoefficient)) {
+      return LightSourcePointer(NULL);
+    }
+  }
+
+  if (lightSource->type == SPOT) {
+    if (!readChildElementAsFloat(element, "umbra", "angle", lightSource->umbraAngle) ||
+        !readChildElementAsFloat(element, "penumbra", "angle", lightSource->penumbraAngle) ||
+        !readChildElementAsFloat(element, "falloff", "value", lightSource->falloffFactor)) {
+      return LightSourcePointer(NULL);         
+    }
+  }
+
+  if (lightSource->type == DIRECTIONAL) {
+    if (!readChildElementAsFloat(element, "range", "value", lightSource->range)) {
+      return LightSourcePointer(NULL);         
+    }
+  }
+
+  return lightSource;
+}
+
+bool SceneLoader::readLightSourceType(const QDomElement &element, LightSourceType &lightSourceType) const {
+  QString sourceType;
+  if (!readAttributeAsString(element, "type", sourceType)) {
+    return false;
+  }
+
+  if (sourceType == "point") {
+    lightSourceType = POINT;
+    return true;
+  }
+  if (sourceType == "directional") {
+    lightSourceType = DIRECTIONAL;
+    return true;
+  }
+  if (sourceType == "spotlight") {
+    lightSourceType = SPOT;
+    return true;    
+  }
+
+  std::cerr << "Scene parsing error: unknown light source type '" << sourceType.toUtf8().constData() << "'" << std::endl;
+  return false;
+}
+
 MaterialPointer SceneLoader::readMaterial(const QDomElement &element) const {
   QDomElement materialElement = element.firstChildElement("material");
   
@@ -157,19 +234,29 @@ bool SceneLoader::readVector(const QDomElement &element, Vector &vector) const {
 }
 
 bool SceneLoader::readAttributeAsFloat(const QDomElement &element, const QString &attributeName, float &value) const {
-  if (element.hasAttribute(attributeName)) {
-    bool isConversionOk;
-    value = element.attribute(attributeName).toFloat(&isConversionOk);    
-    if (isConversionOk) {
-      return true;
-    } else {
-      std::cerr << "Scene parsing error: unable to convert '" << attributeName.toUtf8().constData() << "' attribute of element '" << element.tagName().toUtf8().constData() << "' to float" << std::endl;
-      return false;
-    }
+  if (!element.hasAttribute(attributeName)) {
+    std::cerr << "Scene parsing error: element '" << element.tagName().toUtf8().constData() << "' has no attribute with name '" << attributeName.toUtf8().constData() << "'" << std::endl;
+    return false;
   }
 
-  std::cerr << "Scene parsing error: element '" << element.tagName().toUtf8().constData() << "' has no attribute with name '" << attributeName.toUtf8().constData() << "'" << std::endl;
-  return false;
+  bool isConversionOk;
+  value = element.attribute(attributeName).toFloat(&isConversionOk);    
+  if (!isConversionOk) {
+    std::cerr << "Scene parsing error: unable to convert '" << attributeName.toUtf8().constData() << "' attribute of element '" << element.tagName().toUtf8().constData() << "' to float" << std::endl;
+    return false;
+  }
+
+  return true;
+}
+
+bool SceneLoader::readAttributeAsString(const QDomElement &element, const QString &attributeName, QString &value) const {
+  if (!element.hasAttribute(attributeName)) {
+    std::cerr << "Scene parsing error: element '" << element.tagName().toUtf8().constData() << "' has no attribute with name '" << attributeName.toUtf8().constData() << "'" << std::endl;
+    return false;
+  }
+
+  value = element.attribute(attributeName);
+  return true;
 }
 
 bool SceneLoader::readChildElementAsVector(const QDomElement &element, const QString &childElementName, Vector &vector) const {
@@ -193,3 +280,4 @@ bool SceneLoader::readChildElementAsFloat(const QDomElement &element, const QStr
 
   return readAttributeAsFloat(childElement, attributeName, value);
 }
+
