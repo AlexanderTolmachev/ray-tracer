@@ -9,6 +9,7 @@
 
 #include "scene.h"
 #include "plane.h"
+#include "sphere.h"
 
 class SceneLoader {
   public:
@@ -26,6 +27,7 @@ class SceneLoader {
     MaterialPointer readMaterial(const QDomElement &element) const;
 
     PlanePointer readPlane(const QDomElement &element, MaterialPointer material) const;
+    ShapePointer readSphere(const QDomElement &element, MaterialPointer material) const;
 
     bool readLightSourceType(const QDomElement &element, LightSourceType &lightSourceType) const;
     bool readVector(const QDomElement &element, Vector &vector) const;

@@ -224,7 +224,12 @@ ShapePointer SceneLoader::readShape(const QDomElement &element) const {
   if (shapeType == "plane") {
     return readPlane(element, shapeMaterial);
   }
+  if (shapeType == "sphere") {
+    return readSphere(element, shapeMaterial);
+  }
+
   // TODO process others
+  return ShapePointer(NULL);
 }
 
 PlanePointer SceneLoader::readPlane(const QDomElement &element, MaterialPointer material) const {
@@ -237,6 +242,18 @@ PlanePointer SceneLoader::readPlane(const QDomElement &element, MaterialPointer 
   }
 
   return PlanePointer(NULL);
+}
+
+ShapePointer SceneLoader::readSphere(const QDomElement &element, MaterialPointer material) const {
+  Vector center;
+  float radius;
+
+  if (readChildElementAsVector(element, "center", center) &&
+      readChildElementAsFloat(element, "radius", "r", radius)) {
+    return SpherePointer(new Sphere(center, radius, material));
+  }
+
+  return SpherePointer(NULL);
 }
 
 MaterialPointer SceneLoader::readMaterial(const QDomElement &element) const {
