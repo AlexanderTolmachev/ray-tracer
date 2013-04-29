@@ -16,25 +16,51 @@ Sphere::~Sphere() {
 }
 
 RayIntersection Sphere::intersectWithRay(const Ray &ray) const {
-  Vector centerToOriginVector = ray.getOriginPosition() - mCenter;
+  // Solve square equation x^2 + b * x + c = 0
+  Vector cameraToRayOrigin = ray.getOriginPosition() - mCenter;
+  float b = ray.getDirection().dotProduct(cameraToRayOrigin);
+  float c = cameraToRayOrigin.dotProduct(cameraToRayOrigin) - mRadius * mRadius;
+  float descriminant = b * b - c;
 
-  // Solving equation x^2 + b * x + c = 0
-  float a = 1;
-  float b = ray.getDirection().dotProduct(centerToOriginVector);
-  float c = centerToOriginVector.dotProduct(centerToOriginVector) - mRadius * mRadius;  
-  Roots roots;
-  int num_roots = solveQuadraticEquation(a, b, c, roots);
-
-  if (num_roots == 0) {
+  if (descriminant < 0)
+  {
     return RayIntersection();
   }
 
-  float	distance = getPositiveClosestToZeroRoot(roots);
+  descriminant = sqrt(descriminant);
 
-  if (distance > 0)
+  float	closestRoot = -1.f;
+
+  // Get closest root
+  float root = -b - descriminant;
+//  float rayExit = -1.f;
+  if (root >= 0.f)
+  {
+    closestRoot = root;
+  }
+
+  root = -b + descriminant;
+  if (root >= 0.f)
+  {
+    if (closestRoot < 0.f)
+    {
+      closestRoot = root;
+    }
+    else if (root < closestRoot)
+    {
+//      rayExit = closestRoot;
+      closestRoot = root;
+    }
+    //else
+    //{
+    //  rayExit = root;
+    //}
+  }
+
+  if (closestRoot > 0.f)
   {
     SpherePointer pointer = SpherePointer(new Sphere(*this));
-    return RayIntersection(true, pointer, distance, getNormal(ray, distance));
+    return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot));
   }
 
   return RayIntersection();
@@ -44,43 +70,4 @@ Vector Sphere::getNormal(const Ray &ray, float distance) const {
   Vector normal = (ray.getPointAt(distance) - mCenter) / mRadius;
   normal.normalize();
   return normal;
-}
-
-/*
-* private:
-*/
-int Sphere::solveQuadraticEquation(float a, float b, float c, Roots &roots) const {
-  float discreminant = 0.f;
-  float divider = 0.f;
-
-  discreminant = b * b - a * c;
-
-  if (discreminant < 0) {
-    return 0;
-  }
-
-  discreminant = sqrt(discreminant);
-  divider = 1.f / a;
-
-  roots.x = (b - discreminant) * divider;
-  roots.y = (b + discreminant) * divider;
-
-  if (discreminant == 0) {
-    return 1;
-  }
-
-  return 2;
-}
-
-float Sphere::getPositiveClosestToZeroRoot(const Roots &roots) const {
-  float closest = -1.f;
-
-  if (roots.x > 0) {
-    closest = roots.x;
-  }
-  if (roots.y > 0 && roots.y < closest) {
-     closest = roots.y;
-  }
-  
-  return closest;
 }

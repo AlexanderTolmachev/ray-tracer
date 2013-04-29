@@ -19,10 +19,6 @@ class Sphere : public Shape {
     virtual Vector getNormal(const Ray &ray, float distance) const;
 
   private:
-    int solveQuadraticEquation(float a, float b, float c, Roots &roots) const;
-    float getPositiveClosestToZeroRoot(const Roots &roots) const;
-
-  private:
     Vector mCenter;
     float mRadius;
 };
