@@ -96,6 +96,7 @@
     <ClCompile Include="..\src\raytracer.cpp" />
     <ClCompile Include="..\src\scene.cpp" />
     <ClCompile Include="..\src\sceneloader.cpp" />
+    <ClCompile Include="..\src\sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\camera.h" />
@@ -109,6 +110,7 @@
     <ClInclude Include="..\src\scene.h" />
     <ClInclude Include="..\src\sceneloader.h" />
     <ClInclude Include="..\src\shape.h" />
+    <ClInclude Include="..\src\sphere.h" />
     <ClInclude Include="..\src\types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
