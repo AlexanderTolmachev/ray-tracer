@@ -39,7 +39,19 @@ int main(int argc, char *argv[]) {
 
   std::cout << "Loading scene finished" << std::endl; 
 
+  RayTracer rayTracer;
+  rayTracer.setScene(scene);
+  rayTracer.setImageResolution(inputParameters->xResolution, inputParameters->yResolution);
 
+  std::cout << "Rendering scene..." << std::endl;
+  rayTracer.renderScene();
+  std::cout << "Rendering scene finished" << std::endl; 
+  
+  std::cout << "Saving image to file '" << inputParameters->outputFilePath.toUtf8().constData() << "'" << std::endl; 
+  rayTracer.saveRenderedImageToFile(inputParameters->outputFilePath);
+  std::cout << "Image is saved" << std::endl;
+
+  return 0; 
 }
 
 void printUsage() {

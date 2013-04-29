@@ -42,7 +42,7 @@ void RayTracer::render() {
   int imageWidth = mScene->getCamera()->getImageWidth();
   int imageHeight = mScene->getCamera()->getImageHeight();
   CameraPointer camera = mScene->getCamera();
-  uchar *renderedImageData = mRenderedImage.bits();
+  unsigned *renderedImageData = reinterpret_cast< unsigned* >(mRenderedImage.bits());
 
   for (int y = 0; y < imageHeight; ++y) {
     for (int x = 0; x < imageWidth; ++x) {

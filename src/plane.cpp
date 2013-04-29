@@ -15,7 +15,18 @@ Plane::~Plane() {
 }
 
 RayIntersection Plane::intersectWithRay(const Ray &ray) const {
-  // TODO implement
+  float cosineRayNormal = mNormal.dotProduct(ray.getDirection());
+  if (fabs(cosineRayNormal) < FLOAT_ZERO) 
+  {
+    return RayIntersection();
+  }
+  
+  float distance = -(ray.getOriginPosition().dotProduct(mNormal) + mDistance) / cosineRayNormal;
+  if (distance > 0.0)
+  {
+    PlanePointer pointer = PlanePointer(new Plane(*this));
+    return RayIntersection(true, pointer, distance, getNormal(ray, distance));
+  }
   return RayIntersection();
 }
 
