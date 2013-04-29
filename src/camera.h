@@ -22,7 +22,10 @@ class Camera {
 
     Ray emitRay(int x, int y) const;
 
-    void setImagePlaneResolution(int width, int height);
+    void setImageResolution(int width, int height);
+
+    int getImageWidth() const;
+    int getImageHeight() const;
 
   private:
     // Camera position (eye) vector
@@ -37,11 +40,11 @@ class Camera {
     float mFocusDistance;
     float	mAspectRatio;
 
-    int	mImagePlaneWidth;
-    int	mImagePlaneHeight;
+    int	mImageWidth;
+    int	mImageHeight;
 
-    // Camera imternal coordinates system
-    Vector mXAxis;
-    Vector mYAxis;
-    Vector mZAxis;
+    // Camera internal coordinate system
+    Vector mCameraXAxis;
+    Vector mCameraYAxis;
+    Vector mCameraZAxis;
 };

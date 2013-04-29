@@ -75,6 +75,9 @@
     <ClCompile Include="..\src\inputparameters.cpp">
       <Filter>Source Files\Common</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ray.cpp">
+      <Filter>Source Files\Tracing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\raytracer.h">

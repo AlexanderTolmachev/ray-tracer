@@ -39,6 +39,7 @@ int main(int argc, char *argv[]) {
 
   std::cout << "Loading scene finished" << std::endl; 
 
+
 }
 
 void printUsage() {

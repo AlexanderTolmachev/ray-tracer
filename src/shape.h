@@ -7,10 +7,10 @@
 
 #include "types.h"
 #include "material.h"
-#include "rayintersection.h"
 #include "ray.h"
 
 class Shape;
+struct RayIntersection; 
 
 typedef QSharedPointer<Shape> ShapePointer;
 
@@ -22,13 +22,8 @@ class Shape {
     virtual RayIntersection intersectWithRay(const Ray &ray) const = 0;
     virtual Vector getNormal(const Ray &ray, float distance) const = 0;
 
-    Color getAmbientColor() const  { return mMaterial->ambientColor; }
-    Color getDiffuseColor() const  { return mMaterial->diffuseColor; }
-    Color getSpecularColor() const { return mMaterial->specularColor; }
-
-    float getReflectionFactor() const { return mMaterial->reflectionFactor; }
-    float getRefractionFactor() const { return mMaterial->refractionFactor; }
-
+    MaterialPointer getMaterial() const { return mMaterial; }
+    
   private:
     MaterialPointer mMaterial;
 };

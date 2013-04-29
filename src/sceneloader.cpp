@@ -8,6 +8,9 @@
 
 #include "sceneloader.h"
 
+/*
+* public:
+*/
 ScenePointer SceneLoader::loadScene(const QString &filePath) const {
   QFile sceneFile(filePath);
 
@@ -36,6 +39,9 @@ ScenePointer SceneLoader::loadScene(const QString &filePath) const {
   return scene;
 }
 
+/*
+* private:
+*/
 ScenePointer SceneLoader::readScene(const QDomNode &rootNode) const {
   if (rootNode.toElement().tagName() != "scene") {
     std::cerr << "Scene parsing error: invalid root tag name, 'scene' expected" << std::endl;

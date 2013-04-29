@@ -92,6 +92,7 @@
     <ClCompile Include="..\src\lightsource.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\plane.cpp" />
+    <ClCompile Include="..\src\ray.cpp" />
     <ClCompile Include="..\src\raytracer.cpp" />
     <ClCompile Include="..\src\scene.cpp" />
     <ClCompile Include="..\src\sceneloader.cpp" />

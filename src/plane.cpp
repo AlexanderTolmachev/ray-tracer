@@ -4,6 +4,7 @@
  */
 
 #include "plane.h"
+#include "rayintersection.h"
 
 Plane::Plane(const Vector &normal, float distance, MaterialPointer material) 
   : Shape(material),

@@ -12,6 +12,7 @@
 #include "lightsource.h"
 #include "material.h"
 #include "camera.h"
+#include "rayintersection.h"
 
 class Scene;
 
@@ -26,6 +27,13 @@ class Scene {
     void addLightSource(LightSourcePointer lightSource);
     void addShape(ShapePointer shape);
     void setBackgroundMaterial(MaterialPointer material);
+
+    CameraPointer getCamera() const;
+    MaterialPointer getBackgroundMaterial() const;
+
+    RayIntersection calculateNearestIntersection(const Ray &ray) const;
+    RayIntersection calculateFirstIntersection(const Ray &ray) const;
+    Color calculateIlluminationColor(const Ray &ray, float distance, const Vector &normal, MaterialPointer material) const;
 
   private:
     CameraPointer mCamera;
