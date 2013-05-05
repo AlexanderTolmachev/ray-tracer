@@ -273,6 +273,20 @@ CylinderPointer SceneLoader::readCylinder(const QDomElement &element, MaterialPo
   return CylinderPointer(NULL);
 }
 
+ConePointer SceneLoader::readCone(const QDomElement &element, MaterialPointer material) const {
+  Vector top;
+  Vector bottomCenter;
+  float radius;
+
+  if (readChildElementAsVector(element, "top", top) &&
+      readChildElementAsVector(element, "bottom", bottomCenter) &&
+      readChildElementAsFloat(element, "radius", "r", radius)) {
+    return ConePointer(new Cone(top, bottomCenter, radius, material));
+  }
+
+  return ConePointer(NULL);
+}
+
 MaterialPointer SceneLoader::readMaterial(const QDomElement &element) const {
   QDomElement materialElement = element.firstChildElement("material");
   
