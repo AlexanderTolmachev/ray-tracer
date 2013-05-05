@@ -10,7 +10,7 @@
 
 
 /*
-* private:
+* public:
 */
 LightSource::LightSource() 
   : constantAttenutaionCoefficient(0), 

@@ -1,5 +1,5 @@
 /*!
- *\file plane.h
+ *\file cylinder.h
  *\brief Contains Cylinder class declaration
  */
 

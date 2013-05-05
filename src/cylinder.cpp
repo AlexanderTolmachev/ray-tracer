@@ -1,5 +1,5 @@
 /*!
- *\file plane.cpp
+ *\file cylinder.cpp
  *\brief Contains Cylinder class definition
  */
 
