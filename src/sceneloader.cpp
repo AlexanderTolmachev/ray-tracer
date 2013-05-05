@@ -227,6 +227,9 @@ ShapePointer SceneLoader::readShape(const QDomElement &element) const {
   if (shapeType == "sphere") {
     return readSphere(element, shapeMaterial);
   }
+  if (shapeType == "cylinder") {
+    return readCylinder(element, shapeMaterial);
+  }
 
   // TODO process others
   return ShapePointer(NULL);
@@ -254,6 +257,20 @@ ShapePointer SceneLoader::readSphere(const QDomElement &element, MaterialPointer
   }
 
   return SpherePointer(NULL);
+}
+
+CylinderPointer SceneLoader::readCylinder(const QDomElement &element, MaterialPointer material) const {
+  Vector topCenter;
+  Vector bottomCenter;
+  float radius;
+
+  if (readChildElementAsVector(element, "top", topCenter) &&
+      readChildElementAsVector(element, "bottom", bottomCenter) &&
+      readChildElementAsFloat(element, "radius", "r", radius)) {
+    return CylinderPointer(new Cylinder(topCenter, bottomCenter, radius, material));
+  }
+
+  return CylinderPointer(NULL);
 }
 
 MaterialPointer SceneLoader::readMaterial(const QDomElement &element) const {

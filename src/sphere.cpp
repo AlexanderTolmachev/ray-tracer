@@ -22,8 +22,7 @@ RayIntersection Sphere::intersectWithRay(const Ray &ray) const {
   float c = cameraToRayOrigin.dotProduct(cameraToRayOrigin) - mRadius * mRadius;
   float descriminant = b * b - c;
 
-  if (descriminant < 0)
-  {
+  if (descriminant < 0) {
     return RayIntersection();
   }
 
@@ -33,32 +32,20 @@ RayIntersection Sphere::intersectWithRay(const Ray &ray) const {
 
   // Get closest root
   float root = -b - descriminant;
-//  float rayExit = -1.f;
-  if (root >= 0.f)
-  {
+  if (root >= 0.f) {
     closestRoot = root;
   }
 
   root = -b + descriminant;
-  if (root >= 0.f)
-  {
-    if (closestRoot < 0.f)
-    {
+  if (root >= 0.f) {
+    if (closestRoot < 0.f) {
+      closestRoot = root;
+    } else if (root < closestRoot) {
       closestRoot = root;
     }
-    else if (root < closestRoot)
-    {
-//      rayExit = closestRoot;
-      closestRoot = root;
-    }
-    //else
-    //{
-    //  rayExit = root;
-    //}
   }
 
-  if (closestRoot > 0.f)
-  {
+  if (closestRoot > 0.f) {
     SpherePointer pointer = SpherePointer(new Sphere(*this));
     return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot));
   }
