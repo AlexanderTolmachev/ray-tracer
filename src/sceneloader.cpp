@@ -230,8 +230,12 @@ ShapePointer SceneLoader::readShape(const QDomElement &element) const {
   if (shapeType == "cylinder") {
     return readCylinder(element, shapeMaterial);
   }
+  if (shapeType == "cone") {
+    return readCone(element, shapeMaterial);
+  }
 
   // TODO process others
+  std::cerr << "Scene parsing error: unknown shape type '" << shapeType.toUtf8().constData() << "'" << std::endl;
   return ShapePointer(NULL);
 }
 

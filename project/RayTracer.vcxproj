@@ -98,9 +98,11 @@
     <ClCompile Include="..\src\scene.cpp" />
     <ClCompile Include="..\src\sceneloader.cpp" />
     <ClCompile Include="..\src\sphere.cpp" />
+    <ClCompile Include="cone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\camera.h" />
+    <ClInclude Include="..\src\cone.h" />
     <ClInclude Include="..\src\cylinder.h" />
     <ClInclude Include="..\src\inputparameters.h" />
     <ClInclude Include="..\src\lightsource.h" />

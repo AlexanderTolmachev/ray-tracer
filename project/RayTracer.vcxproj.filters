@@ -84,6 +84,9 @@
     <ClCompile Include="..\src\cylinder.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="cone.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\raytracer.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="..\src\cylinder.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\cone.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
