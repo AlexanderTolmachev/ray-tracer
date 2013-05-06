@@ -15,7 +15,7 @@ typedef QSharedPointer<Cone> ConePointer;
 class Cone : public Shape {
   public:
     Cone(Vector top, Vector bottomCenter, float radius, MaterialPointer material);
-    ~Cone();
+    virtual ~Cone();
 
     virtual RayIntersection intersectWithRay(const Ray &ray) const;
     virtual Vector getNormal(const Ray &ray, float distance) const;

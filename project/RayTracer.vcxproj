@@ -98,6 +98,7 @@
     <ClCompile Include="..\src\scene.cpp" />
     <ClCompile Include="..\src\sceneloader.cpp" />
     <ClCompile Include="..\src\sphere.cpp" />
+    <ClCompile Include="..\src\triangle.cpp" />
     <ClCompile Include="cone.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +116,7 @@
     <ClInclude Include="..\src\sceneloader.h" />
     <ClInclude Include="..\src\shape.h" />
     <ClInclude Include="..\src\sphere.h" />
+    <ClInclude Include="..\src\triangle.h" />
     <ClInclude Include="..\src\types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

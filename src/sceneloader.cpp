@@ -233,6 +233,9 @@ ShapePointer SceneLoader::readShape(const QDomElement &element) const {
   if (shapeType == "cone") {
     return readCone(element, shapeMaterial);
   }
+  if (shapeType == "triangle") {
+    return readTriangle(element, shapeMaterial);
+  }
 
   // TODO process others
   std::cerr << "Scene parsing error: unknown shape type '" << shapeType.toUtf8().constData() << "'" << std::endl;
@@ -289,6 +292,20 @@ ConePointer SceneLoader::readCone(const QDomElement &element, MaterialPointer ma
   }
 
   return ConePointer(NULL);
+}
+
+TrianglePointer SceneLoader::readTriangle(const QDomElement &element, MaterialPointer material) const {
+  Vector vertex0;
+  Vector vertex1;
+  Vector vertex2;
+
+  if (readChildElementAsVector(element, "v0", vertex0) &&
+      readChildElementAsVector(element, "v1", vertex1) &&
+      readChildElementAsVector(element, "v2", vertex2)) {
+    return TrianglePointer(new Triangle(vertex0, vertex1, vertex2, material));
+  }
+
+  return TrianglePointer(NULL);
 }
 
 MaterialPointer SceneLoader::readMaterial(const QDomElement &element) const {
