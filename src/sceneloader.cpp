@@ -138,76 +138,46 @@ CameraPointer SceneLoader::readCamera(const QDomElement &element) const {
 }
 
 LightSourcePointer SceneLoader::readLightSource(const QDomElement &element) const {
-  LightSourcePointer lightSource = LightSourcePointer(new LightSource());
+  QString lightSourceType;
 
-  if (!readLightSourceType(element, lightSource->type)) {
+  if (!readAttributeAsString(element, "type", lightSourceType)) {
     return LightSourcePointer(NULL);
   }
 
-  if (lightSource->type == DIRECTIONAL || lightSource->type == SPOT) {
-    if (!readChildElementAsVector(element, "dir", lightSource->direction)) {
-      return LightSourcePointer(NULL);
-    }
-  }  
-  
-  if (lightSource->type == POINT || lightSource->type == SPOT) {
-    if (!readChildElementAsVector(element, "pos", lightSource->position)) {
-      return LightSourcePointer(NULL);
-    }   
-  }
+  Color ambientIntensity;
+  Color diffuseIntensity;
+  Color specularIntensity;
 
-  if (!readChildElementAsVector(element, "ambient_emission", lightSource->ambientIntensity) ||
-      !readChildElementAsVector(element, "diffuse_emission", lightSource->diffuseIntensity) ||
-      !readChildElementAsVector(element, "specular_emission", lightSource->specularIntensity)) {
+  if (!readChildElementAsVector(element, "ambient_emission", ambientIntensity) ||
+      !readChildElementAsVector(element, "diffuse_emission", diffuseIntensity) ||
+      !readChildElementAsVector(element, "specular_emission", specularIntensity)) {
     return LightSourcePointer(NULL);
   }
 
-  if (lightSource->type == POINT || lightSource->type == SPOT) {
-    if (!readChildElementAsFloat(element, "attenuation", "const", lightSource->constantAttenutaionCoefficient) ||
-        !readChildElementAsFloat(element, "attenuation", "linear", lightSource->linearAttenutaionCoefficient) ||
-        !readChildElementAsFloat(element, "attenuation", "quad", lightSource->quadraticAttenutaionCoefficient)) {
-      return LightSourcePointer(NULL);
-    }
+  if (lightSourceType == "directional") {
+    return readDirectedLight(element, ambientIntensity, diffuseIntensity, specularIntensity);
+  }
+  if (lightSourceType == "point") {
+    return readPointLight(element, ambientIntensity, diffuseIntensity, specularIntensity);
+  }
+  if (lightSourceType == "spotlight") {
+    return readSpotLight(element, ambientIntensity, diffuseIntensity, specularIntensity);
   }
 
-  if (lightSource->type == SPOT) {
-    if (!readChildElementAsFloat(element, "umbra", "angle", lightSource->umbraAngle) ||
-        !readChildElementAsFloat(element, "penumbra", "angle", lightSource->penumbraAngle) ||
-        !readChildElementAsFloat(element, "falloff", "value", lightSource->falloffFactor)) {
-      return LightSourcePointer(NULL);         
-    }
-  }
-
-  if (lightSource->type == DIRECTIONAL) {
-    if (!readChildElementAsFloat(element, "range", "value", lightSource->range)) {
-      return LightSourcePointer(NULL);         
-    }
-  }
-
-  return lightSource;
+  std::cerr << "Scene parsing error: unknown light source type '" << lightSourceType.toUtf8().constData() << "'" << std::endl;
+  return LightSourcePointer(NULL);
 }
 
-bool SceneLoader::readLightSourceType(const QDomElement &element, LightSourceType &lightSourceType) const {
-  QString sourceType;
-  if (!readAttributeAsString(element, "type", sourceType)) {
-    return false;
-  }
+DirectedLightPointer SceneLoader::readDirectedLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const {
+  return DirectedLightPointer(NULL);
+}
 
-  if (sourceType == "point") {
-    lightSourceType = POINT;
-    return true;
-  }
-  if (sourceType == "directional") {
-    lightSourceType = DIRECTIONAL;
-    return true;
-  }
-  if (sourceType == "spotlight") {
-    lightSourceType = SPOT;
-    return true;    
-  }
+PointLightPointer SceneLoader::readPointLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const {
+  return PointLightPointer(NULL);
+}
 
-  std::cerr << "Scene parsing error: unknown light source type '" << sourceType.toUtf8().constData() << "'" << std::endl;
-  return false;
+SpotLightPointer SceneLoader::readSpotLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const {
+  return SpotLightPointer(NULL);
 }
 
 ShapePointer SceneLoader::readShape(const QDomElement &element) const {

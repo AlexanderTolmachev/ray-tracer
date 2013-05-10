@@ -8,6 +8,9 @@
 #include <QDomDocument>
 
 #include "scene.h"
+#include "directedlight.h"
+#include "pointlight.h"
+#include "spotlight.h"
 #include "plane.h"
 #include "sphere.h"
 #include "cylinder.h"
@@ -29,13 +32,16 @@ class SceneLoader {
     ShapePointer readShape(const QDomElement &element) const;
     MaterialPointer readMaterial(const QDomElement &element) const;
 
+    DirectedLightPointer readDirectedLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const;
+    PointLightPointer readPointLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const;
+    SpotLightPointer readSpotLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const;
+
     PlanePointer readPlane(const QDomElement &element, MaterialPointer material) const;
     ShapePointer readSphere(const QDomElement &element, MaterialPointer material) const;
     CylinderPointer readCylinder(const QDomElement &element, MaterialPointer material) const;
     ConePointer readCone(const QDomElement &element, MaterialPointer material) const;
     TrianglePointer readTriangle(const QDomElement &element, MaterialPointer material) const;
 
-    bool readLightSourceType(const QDomElement &element, LightSourceType &lightSourceType) const;
     bool readVector(const QDomElement &element, Vector &vector) const;
     bool readAttributeAsFloat(const QDomElement &element, const QString &attributeName, float &value) const;
     bool readAttributeAsString(const QDomElement &element, const QString &attributeName, QString &value) const;
