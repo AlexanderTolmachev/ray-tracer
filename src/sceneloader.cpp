@@ -169,14 +169,57 @@ LightSourcePointer SceneLoader::readLightSource(const QDomElement &element) cons
 }
 
 DirectedLightPointer SceneLoader::readDirectedLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const {
+  Vector direction;
+  float	range;
+
+  if (readChildElementAsVector(element, "dir", direction) &&
+      readChildElementAsFloat(element, "range", "value", range)) {
+    return DirectedLightPointer(new DirectedLight(ambientIntensity, diffuseIntensity, specularIntensity, direction, range));
+  }
+
   return DirectedLightPointer(NULL);
 }
 
 PointLightPointer SceneLoader::readPointLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const {
+  Vector position;
+  float constantAttenutaionCoefficient;
+  float linearAttenutaionCoefficient;
+  float quadraticAttenutaionCoefficient;
+
+  if (readChildElementAsVector(element, "pos", position) && 
+      readChildElementAsFloat(element, "attenuation", "const", constantAttenutaionCoefficient) &&
+      readChildElementAsFloat(element, "attenuation", "linear", linearAttenutaionCoefficient) &&
+      readChildElementAsFloat(element, "attenuation", "quad", quadraticAttenutaionCoefficient)) {
+    return PointLightPointer(new PointLight(ambientIntensity, diffuseIntensity, specularIntensity, position, 
+                                            constantAttenutaionCoefficient, linearAttenutaionCoefficient, quadraticAttenutaionCoefficient));
+  }
+  
   return PointLightPointer(NULL);
 }
 
 SpotLightPointer SceneLoader::readSpotLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const {
+  Vector position;
+  Vector direction;
+  float constantAttenutaionCoefficient;
+  float linearAttenutaionCoefficient;
+  float quadraticAttenutaionCoefficient;
+  float	umbraAngle;
+  float	penumbraAngle;
+  float	falloffFactor;
+  
+  if (readChildElementAsVector(element, "pos", position) && 
+      readChildElementAsVector(element, "dir", direction) &&
+      readChildElementAsFloat(element, "attenuation", "const", constantAttenutaionCoefficient) &&
+      readChildElementAsFloat(element, "attenuation", "linear", linearAttenutaionCoefficient) &&
+      readChildElementAsFloat(element, "attenuation", "quad", quadraticAttenutaionCoefficient) &&
+      readChildElementAsFloat(element, "umbra", "angle", umbraAngle) &&
+      readChildElementAsFloat(element, "penumbra", "angle", penumbraAngle) &&
+      readChildElementAsFloat(element, "falloff", "value", falloffFactor)) {
+    return SpotLightPointer(new SpotLight(ambientIntensity, diffuseIntensity, specularIntensity, position, direction, 
+                                          constantAttenutaionCoefficient, linearAttenutaionCoefficient, quadraticAttenutaionCoefficient, 
+                                          umbraAngle, penumbraAngle, falloffFactor));
+  }
+
   return SpotLightPointer(NULL);
 }
 

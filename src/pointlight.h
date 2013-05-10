@@ -8,8 +8,7 @@ typedef QSharedPointer<PointLight> PointLightPointer;
 
 class PointLight : public LightSource {
   public:
-    PointLight(Color ambientIntensity, Color diffuseIntensity, Color specularIntensity, 
-               Vector position, Vector direction, 
+    PointLight(Color ambientIntensity, Color diffuseIntensity, Color specularIntensity, Vector position, 
                float constantAttenutaionCoefficient, float linearAttenutaionCoefficient, float quadraticAttenutaionCoefficient);
     ~PointLight();
 
@@ -18,8 +17,6 @@ class PointLight : public LightSource {
   private:
     // Light position
     Vector mPosition;
-    // Light direction
-    Vector mDirection;
 
     // Attenuation coefficients
     float	mConstantAttenutaionCoefficient;

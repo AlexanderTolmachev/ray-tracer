@@ -1,7 +1,9 @@
 #include "directedlight.h"
 
-DirectedLight::DirectedLight(Color ambientIntensity, Color diffuseIntensity, Color specularIntensity, float range) 
+DirectedLight::DirectedLight(Color ambientIntensity, Color diffuseIntensity, Color specularIntensity, 
+                             Vector direction,  float range) 
   : LightSource(ambientIntensity, diffuseIntensity, specularIntensity),
+    mDirection(direction),
     mRange(range) {
 }
 
