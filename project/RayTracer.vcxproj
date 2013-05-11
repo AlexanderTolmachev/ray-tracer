@@ -112,6 +112,7 @@
     <ClInclude Include="..\src\inputparameters.h" />
     <ClInclude Include="..\src\lightsource.h" />
     <ClInclude Include="..\src\material.h" />
+    <ClInclude Include="..\src\mathcommons.h" />
     <ClInclude Include="..\src\plane.h" />
     <ClInclude Include="..\src\pointlight.h" />
     <ClInclude Include="..\src\ray.h" />

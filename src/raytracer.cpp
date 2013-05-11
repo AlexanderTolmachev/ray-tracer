@@ -5,7 +5,7 @@
 
 #include "raytracer.h"
 
-#define MAX_TRACER_RECURSION_DEPTH 10
+#define MAX_TRACER_RECURSION_DEPTH 15
 #define RGBA(r, g, b, a) ((a & 0xff) << 24) | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
 
 /*

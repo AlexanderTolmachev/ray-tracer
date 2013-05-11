@@ -158,5 +158,8 @@
     <ClInclude Include="..\src\pointlight.h">
       <Filter>Header Files\Light</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\mathcommons.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

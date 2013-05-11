@@ -1,4 +1,5 @@
 #include "spotlight.h"
+#include "mathcommons.h"
 
 SpotLight::SpotLight(Color ambientIntensity, Color diffuseIntensity, Color specularIntensity, 
                      Vector position, Vector direction, 
