@@ -6,10 +6,23 @@
         <look_at x="0.000" y="0.000" z="0.000"/>
         <fov angle="60.000"/>
         <dist_to_near_plane dist="1.000"/>
-        <use_exposure state="true"/>
-        <use_gamma_correction state="true"/>
     </camera>
 
+    <light type="point">
+        <pos x="0.000" y="7.000" z="5.000"/>
+        <ambient_emission  x="1.000" y="1.000" z="1.000"/>
+        <diffuse_emission  x="1.000" y="1.000" z="1.000"/>
+        <specular_emission x="1.000" y="1.000" z="1.000"/>
+        <attenuation const="0.500" linear="0.0500" quad="0.008"/>
+    </light>
+    <light type="directional">
+        <dir x="0.7500" y="-1.00" z="-1.00"/>
+        <ambient_emission  x="0.500" y="0.500" z="0.500"/>
+        <diffuse_emission  x="0.900" y="0.900" z="0.900"/>
+        <specular_emission x="1.000" y="1.000" z="1.000"/>
+        <attenuation const="1.000" linear="0.0020" quad="0.002"/>
+        <range value="2000.000"/>
+    </light>
     <light type="spotlight">
         <pos x="0.00" y="10.00" z="0.000"/>
         <dir x="0.000" y="-1.000" z="-0.000"/>
@@ -43,10 +56,22 @@
         <penumbra angle="60.000"/>
         <falloff value="2.000"/>
     </light>
-
+   
     <object type="plane">
       <normal x="0.00" y="1.00" z="0.00"/>
       <D d="0.00"/>
+      <material>
+        <ambient  x="0.001" y="0.001" z="0.001"/>
+        <diffuse  x="1.000" y="1.000" z="1.000"/>
+        <specular x="1.000" y="1.000" z="1.000"/>
+        <specular_power power="35.0"/>
+        <refraction_coeff theta="0.2"/>
+        <illumination_factors illumination_factor="0.200" reflection_factor="0.010" refraction_factor="0.000"/>
+      </material>		
+    </object>
+    <object type="plane">
+      <normal x="0.00" y="0.00" z="1.00"/>
+      <D d="10.00"/>
       <material>
         <ambient  x="0.001" y="0.001" z="0.001"/>
         <diffuse  x="1.000" y="1.000" z="1.000"/>
