@@ -20,7 +20,7 @@ class Shape {
     virtual ~Shape() {}
 
     virtual RayIntersection intersectWithRay(const Ray &ray) const = 0;
-    virtual Vector getNormal(const Ray &ray, float distance) const = 0;
+    virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection) const = 0;
 
     MaterialPointer getMaterial() const { return mMaterial; }
     

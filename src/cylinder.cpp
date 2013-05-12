@@ -124,7 +124,7 @@ RayIntersection Cylinder::intersectWithRay(const Ray &ray) const {
   return RayIntersection();
 }
 
-Vector Cylinder::getNormal(const Ray &ray, float distance) const {
+Vector Cylinder::getNormal(const Ray &ray, float distance, const RayIntersection &intersection) const {
   Vector intersectionPoint = ray.getPointAt(distance);
   Vector cylinderAxis = mTopCenter - mBottomCenter;
   cylinderAxis.normalize();

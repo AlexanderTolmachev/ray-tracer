@@ -57,9 +57,9 @@ RayIntersection Triangle::intersectWithRay(const Ray &ray) const {
   }
 
   TrianglePointer pointer = TrianglePointer(new Triangle(*this));
-  return RayIntersection(true, pointer, f, getNormal(ray, f));
+  return RayIntersection(true, pointer, f, getNormal(ray, f), lambda, mue);
 }
 
-Vector Triangle::getNormal(const Ray &ray, float distance) const {
+Vector Triangle::getNormal(const Ray &ray, float distance, const RayIntersection &intersection) const {
   return mNormal;
 }

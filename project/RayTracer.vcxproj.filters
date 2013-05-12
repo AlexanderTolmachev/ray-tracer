@@ -99,6 +99,12 @@
     <ClCompile Include="..\src\cone.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\meshmodel.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\objfilereader.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\raytracer.h">
@@ -159,6 +165,12 @@
       <Filter>Header Files\Light</Filter>
     </ClInclude>
     <ClInclude Include="..\src\mathcommons.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\meshmodel.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\objfilereader.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
   </ItemGroup>

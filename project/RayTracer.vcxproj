@@ -94,6 +94,8 @@
     <ClCompile Include="..\src\inputparameters.cpp" />
     <ClCompile Include="..\src\lightsource.cpp" />
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\meshmodel.cpp" />
+    <ClCompile Include="..\src\objfilereader.cpp" />
     <ClCompile Include="..\src\plane.cpp" />
     <ClCompile Include="..\src\pointlight.cpp" />
     <ClCompile Include="..\src\ray.cpp" />
@@ -113,6 +115,8 @@
     <ClInclude Include="..\src\lightsource.h" />
     <ClInclude Include="..\src\material.h" />
     <ClInclude Include="..\src\mathcommons.h" />
+    <ClInclude Include="..\src\meshmodel.h" />
+    <ClInclude Include="..\src\objfilereader.h" />
     <ClInclude Include="..\src\plane.h" />
     <ClInclude Include="..\src\pointlight.h" />
     <ClInclude Include="..\src\ray.h" />

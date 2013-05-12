@@ -7,6 +7,7 @@
 
 #include "shape.h"
 #include "types.h"
+#include "rayintersection.h"
 
 class Cone;
 
@@ -18,7 +19,7 @@ class Cone : public Shape {
     virtual ~Cone();
 
     virtual RayIntersection intersectWithRay(const Ray &ray) const;
-    virtual Vector getNormal(const Ray &ray, float distance) const;
+    virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection = RayIntersection()) const;
 
   private:
     Vector mTop;

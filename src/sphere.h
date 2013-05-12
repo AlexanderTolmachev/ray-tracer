@@ -5,6 +5,7 @@
 #pragma once;
 
 #include "shape.h"
+#include "rayintersection.h"
 
 class Sphere;
 
@@ -16,7 +17,7 @@ class Sphere : public Shape {
     virtual ~Sphere();
 
     virtual RayIntersection intersectWithRay(const Ray &ray) const;
-    virtual Vector getNormal(const Ray &ray, float distance) const;
+    virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection = RayIntersection()) const;
 
   private:
     Vector mCenter;

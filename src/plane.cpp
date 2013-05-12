@@ -30,6 +30,6 @@ RayIntersection Plane::intersectWithRay(const Ray &ray) const {
   return RayIntersection();
 }
 
-Vector Plane::getNormal(const Ray &ray, float distance) const {
+Vector Plane::getNormal(const Ray &ray, float distance, const RayIntersection &intersection) const {
   return mNormal;
 }

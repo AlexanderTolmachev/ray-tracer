@@ -16,6 +16,7 @@
 #include "cylinder.h"
 #include "cone.h"
 #include "triangle.h"
+#include "meshmodel.h"
 
 class SceneLoader {
   public:
@@ -41,10 +42,12 @@ class SceneLoader {
     CylinderPointer readCylinder(const QDomElement &element, MaterialPointer material) const;
     ConePointer readCone(const QDomElement &element, MaterialPointer material) const;
     TrianglePointer readTriangle(const QDomElement &element, MaterialPointer material) const;
+    MeshModelPointer readMeshModel(const QDomElement &element, MaterialPointer material) const;
 
     bool readVector(const QDomElement &element, Vector &vector) const;
     bool readAttributeAsFloat(const QDomElement &element, const QString &attributeName, float &value) const;
     bool readAttributeAsString(const QDomElement &element, const QString &attributeName, QString &value) const;
     bool readChildElementAsVector(const QDomElement &element, const QString &childElementName, Vector &vector) const;
     bool readChildElementAsFloat(const QDomElement &element, const QString &childElementName, const QString &attributeName, float &value) const;
+    bool readChildElementAsString(const QDomElement &element, const QString &childElementName, const QString &attributeName, QString &value) const;
 };

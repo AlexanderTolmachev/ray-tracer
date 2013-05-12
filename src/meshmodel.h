@@ -4,6 +4,25 @@
 
 #include "triangle.h"
 
+class ModelTriangle;
+
+typedef QSharedPointer<ModelTriangle> ModelTrianglePointer;
+
+class ModelTriangle : public Triangle {
+  public:
+    ModelTriangle(Vector vertex0, Vector vertex1, Vector vertex2,
+                  Vector normal0, Vector normal1, Vector normal2,
+                  MaterialPointer material);
+    virtual ~ModelTriangle();
+
+    virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection = RayIntersection()) const;
+
+  private:
+    Vector mNormal0;
+    Vector mNormal1;
+    Vector mNormal2;
+};
+
 struct BoundingBox {
   
   bool intersectsWithRay(const Ray &ray) const;
@@ -22,7 +41,7 @@ class MeshModel : public Shape {
     virtual ~MeshModel();
 
     virtual RayIntersection intersectWithRay(const Ray &ray) const;
-    virtual Vector getNormal(const Ray &ray, float distance) const;
+    virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection = RayIntersection()) const;
 
   private:
     std::vector<TrianglePointer> mTriangles;

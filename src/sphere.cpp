@@ -53,7 +53,7 @@ RayIntersection Sphere::intersectWithRay(const Ray &ray) const {
   return RayIntersection();
 }
 
-Vector Sphere::getNormal(const Ray &ray, float distance) const {
+Vector Sphere::getNormal(const Ray &ray, float distance, const RayIntersection &intersection) const {
   Vector normal = (ray.getPointAt(distance) - mCenter) / mRadius;
   normal.normalize();
   return normal;

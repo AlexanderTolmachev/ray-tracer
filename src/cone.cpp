@@ -111,7 +111,7 @@ RayIntersection Cone::intersectWithRay(const Ray &ray) const {
   return RayIntersection();  
 }
 
-Vector Cone::getNormal(const Ray &ray, float distance) const {
+Vector Cone::getNormal(const Ray &ray, float distance, const RayIntersection &intersection) const {
   Vector coneAxis	= (mBottomCenter - mTop);
   coneAxis.normalize();
   Vector point = ray.getPointAt(distance);

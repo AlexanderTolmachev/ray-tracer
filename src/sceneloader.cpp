@@ -7,6 +7,7 @@
 #include <QFile>
 
 #include "sceneloader.h"
+#include "objfilereader.h"
 
 /*
 * public:
@@ -15,8 +16,7 @@ ScenePointer SceneLoader::loadScene(const QString &filePath) const {
   QFile sceneFile(filePath);
 
   sceneFile.open(QIODevice::ReadOnly);
-  if (!sceneFile.isOpen())
-  {
+  if (!sceneFile.isOpen()) {
     std::cerr << "Unable to open file at path '" << filePath.toUtf8().constData() << "'" << std::endl;
     return ScenePointer(NULL);
   }
@@ -247,6 +247,9 @@ ShapePointer SceneLoader::readShape(const QDomElement &element) const {
   if (shapeType == "triangle") {
     return readTriangle(element, shapeMaterial);
   }
+  if (shapeType == "model") {
+    return readMeshModel(element, shapeMaterial);
+  }
 
   // TODO process others
   std::cerr << "Scene parsing error: unknown shape type '" << shapeType.toUtf8().constData() << "'" << std::endl;
@@ -318,6 +321,22 @@ TrianglePointer SceneLoader::readTriangle(const QDomElement &element, MaterialPo
 
   return TrianglePointer(NULL);
 }
+
+MeshModelPointer SceneLoader::readMeshModel(const QDomElement &element, MaterialPointer material) const {
+  Vector translation;
+  Vector scale;
+  QString modelFileName;
+
+  if (readChildElementAsVector(element, "translation", translation) &&
+      readChildElementAsVector(element, "scale", scale) &&
+      readChildElementAsString(element, "model", "file_name", modelFileName)) {
+    ObjFileReader objFileReader;
+    return objFileReader.readMeshFromObjFile(modelFileName, translation, scale, material);
+  }
+  
+  return MeshModelPointer(NULL);
+}
+
 
 MaterialPointer SceneLoader::readMaterial(const QDomElement &element) const {
   QDomElement materialElement = element.firstChildElement("material");
@@ -400,3 +419,14 @@ bool SceneLoader::readChildElementAsFloat(const QDomElement &element, const QStr
   return readAttributeAsFloat(childElement, attributeName, value);
 }
 
+
+bool SceneLoader::readChildElementAsString(const QDomElement &element, const QString &childElementName, const QString &attributeName, QString &value) const {
+  QDomElement childElement = element.firstChildElement(childElementName);
+
+  if (childElement.isNull()) {
+    std::cerr << "Scene parsing error: element '" << element.tagName().toUtf8().constData() << "' has no '" << childElementName.toUtf8().constData() << "' child element" << std::endl;
+    return false;
+  }
+
+  return readAttributeAsString(childElement, attributeName, value);
+}

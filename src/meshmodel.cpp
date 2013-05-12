@@ -2,6 +2,24 @@
 #include "rayintersection.h"
 #include "types.h"
 
+ModelTriangle::ModelTriangle(Vector vertex0, Vector vertex1, Vector vertex2,
+                             Vector normal0, Vector normal1, Vector normal2, 
+                             MaterialPointer material)
+  : Triangle(vertex0, vertex1, vertex2, material),
+    mNormal0(normal0),
+    mNormal1(normal1),
+    mNormal2(normal2) {
+}
+
+ModelTriangle::~ModelTriangle() {
+}
+
+Vector ModelTriangle::getNormal(const Ray &ray, float distance, const RayIntersection &intersection) const {
+  Vector normal = mNormal1 * intersection.u + mNormal2 * intersection.v + mNormal0 * (1 - intersection.u - intersection.v);
+  normal.normalize();
+  return normal;
+}
+
 bool BoundingBox::intersectsWithRay(const Ray &ray) const {
   Vector rayOrigin    = ray.getOriginPosition();
   Vector rayDirection = ray.getDirection();
@@ -51,6 +69,9 @@ MeshModel::MeshModel(const std::vector<TrianglePointer> &triangles, const Boundi
     mBoundingBox(boundingBox) {
 }
 
+MeshModel::~MeshModel() {
+}
+
 RayIntersection MeshModel::intersectWithRay(const Ray &ray) const {
   if (!mBoundingBox.intersectsWithRay(ray)) {
     return RayIntersection();
@@ -72,7 +93,7 @@ RayIntersection MeshModel::intersectWithRay(const Ray &ray) const {
   return closestIntersection;
 }
 
-Vector MeshModel::getNormal(const Ray &ray, float distance) const {
+Vector MeshModel::getNormal(const Ray &ray, float distance, const RayIntersection &intersection) const {
   // This method is actually never called
   return Vector();
 }
