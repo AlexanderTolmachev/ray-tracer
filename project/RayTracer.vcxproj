@@ -88,6 +88,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\camera.cpp" />
+    <ClCompile Include="..\src\cone.cpp" />
     <ClCompile Include="..\src\cylinder.cpp" />
     <ClCompile Include="..\src\directedlight.cpp" />
     <ClCompile Include="..\src\inputparameters.cpp" />
@@ -102,7 +103,6 @@
     <ClCompile Include="..\src\sphere.cpp" />
     <ClCompile Include="..\src\spotlight.cpp" />
     <ClCompile Include="..\src\triangle.cpp" />
-    <ClCompile Include="cone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\camera.h" />

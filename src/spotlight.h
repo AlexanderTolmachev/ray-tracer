@@ -33,4 +33,7 @@ private:
   float	mPenumbraAngle;
   // Falloff factor
   float	mFalloffFactor;
+
+  float mHalfUmbraAngleCosine;
+  float mHalfPenumbraAngleCosine;
 };

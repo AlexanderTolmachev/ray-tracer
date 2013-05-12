@@ -3,10 +3,9 @@
 #include "scene.h"
 
 DirectedLight::DirectedLight(Color ambientIntensity, Color diffuseIntensity, Color specularIntensity, 
-                             Vector direction,  float range) 
+                             Vector direction) 
   : LightSource(ambientIntensity, diffuseIntensity, specularIntensity),
-    mDirection(direction),
-    mRange(range) {
+    mDirection(direction) {
 }
 
 DirectedLight::~DirectedLight() {

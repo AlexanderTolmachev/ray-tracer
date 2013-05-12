@@ -170,11 +170,9 @@ LightSourcePointer SceneLoader::readLightSource(const QDomElement &element) cons
 
 DirectedLightPointer SceneLoader::readDirectedLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const {
   Vector direction;
-  float	range;
 
-  if (readChildElementAsVector(element, "dir", direction) &&
-      readChildElementAsFloat(element, "range", "value", range)) {
-    return DirectedLightPointer(new DirectedLight(ambientIntensity, diffuseIntensity, specularIntensity, direction, range));
+  if (readChildElementAsVector(element, "dir", direction)) {
+    return DirectedLightPointer(new DirectedLight(ambientIntensity, diffuseIntensity, specularIntensity, direction));
   }
 
   return DirectedLightPointer(NULL);

@@ -27,20 +27,21 @@ Color PointLight::calculateColor(const Scene &scene, const Ray &ray, float dista
   Vector shadowRayDirection = mPosition - point;
   float	distanceToLight	= shadowRayDirection.length();
   float	attenuation	= 1 / (mConstantAttenutaionCoefficient + mLinearAttenutaionCoefficient * distanceToLight + mQuadraticAttenutaionCoefficient * distanceToLight * distanceToLight);
-  shadowRayDirection /= distanceToLight; 
-  float	shadowRayDotNormal = shadowRayDirection.dotProduct(normal);
   result *= attenuation;
+
+  shadowRayDirection.normalize(); 
+  float	shadowRayDotNormal = shadowRayDirection.dotProduct(normal);
 
   // If the point is not illuminated
   if (shadowRayDotNormal <= 0.0) {
-    return material->ambientColor;
+    return result;
   }
 
   Ray shadowRay(point + shadowRayDirection * EPS, shadowRayDirection);	
-  RayIntersection shadowRayIntersection = scene.calculateFirstIntersection(shadowRay);
+  RayIntersection shadowRayIntersection = scene.calculateNearestIntersection(shadowRay);
   
   // If object is not in shadow
-  if (!shadowRayIntersection.rayIntersectsWithShape) {
+  if (!shadowRayIntersection.rayIntersectsWithShape || shadowRayIntersection.distanceFromRayOrigin > distanceToLight) {
     Color diffuseColor = material->diffuseColor;
     diffuseComponent  = componentwiseProduct(diffuseColor, mDiffuseIntensity * attenuation * shadowRayDotNormal);
 
@@ -52,7 +53,7 @@ Color PointLight::calculateColor(const Scene &scene, const Ray &ray, float dista
 
     float	cosLightReflect = cameraDirection.dotProduct(lightReflect);
     if (cosLightReflect > 0.0) {
-      const Color specularColor = material->specularColor; 
+      Color specularColor = material->specularColor; 
       specularComponent	= componentwiseProduct(specularColor, mSpecularIntensity * powf(cosLightReflect, material->specularPower) * attenuation);
     }				
   }
