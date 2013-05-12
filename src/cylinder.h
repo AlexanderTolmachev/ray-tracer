@@ -7,7 +7,6 @@
 
 #include "shape.h"
 #include "types.h"
-#include "rayintersection.h"
 
 class Cylinder;
 
@@ -19,7 +18,7 @@ class Cylinder : public Shape {
     virtual ~Cylinder();
 
     virtual RayIntersection intersectWithRay(const Ray &ray) const;
-    virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection = RayIntersection()) const;
+    virtual Vector getNormal(const Ray &ray, float distance) const;
 
   private:
     Vector mBottomCenter;

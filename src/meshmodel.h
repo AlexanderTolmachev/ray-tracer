@@ -15,7 +15,8 @@ class ModelTriangle : public Triangle {
                   MaterialPointer material);
     virtual ~ModelTriangle();
 
-    virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection = RayIntersection()) const;
+    virtual RayIntersection intersectWithRay(const Ray &ray) const;
+    Vector ModelTriangle::getNormal(const Ray &ray, float distance, float u, float v) const;
 
   private:
     Vector mNormal0;
@@ -41,7 +42,7 @@ class MeshModel : public Shape {
     virtual ~MeshModel();
 
     virtual RayIntersection intersectWithRay(const Ray &ray) const;
-    virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection = RayIntersection()) const;
+    virtual Vector getNormal(const Ray &ray, float distance) const;
 
   private:
     std::vector<ModelTrianglePointer> mTriangles;

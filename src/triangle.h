@@ -7,7 +7,6 @@
 
 #include "shape.h"
 #include "types.h"
-#include "rayintersection.h"
 
 class Triangle;
 
@@ -19,9 +18,9 @@ class Triangle : public Shape {
     virtual ~Triangle();
 
     virtual RayIntersection intersectWithRay(const Ray &ray) const;
-    virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection = RayIntersection()) const;
+    virtual Vector getNormal(const Ray &ray, float distance) const;
 
-  private:
+protected:
     Vector mVertex0;
     Vector mVertex1;
     Vector mVertex2;

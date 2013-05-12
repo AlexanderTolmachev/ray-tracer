@@ -12,16 +12,12 @@ struct RayIntersection {
   RayIntersection() 
     : rayIntersectsWithShape(false), 
       shape(NULL), 
-      distanceFromRayOrigin(MAX_DISTANCE_TO_INTERSECTON), 
-      u(0.0), 
-      v(0.0) {}
-  RayIntersection(bool intersectsWithShape, ShapePointer intersectsWith, float distance, Vector normal, float uCoord = 0.0, float vCoord = 0.0)
+      distanceFromRayOrigin(MAX_DISTANCE_TO_INTERSECTON) {}
+  RayIntersection(bool intersectsWithShape, ShapePointer intersectsWith, float distance, Vector normal)
     : rayIntersectsWithShape(intersectsWithShape), 
       shape(intersectsWith), 
       distanceFromRayOrigin(distance), 
-      normalAtInresectionPoint(normal),
-      u(uCoord),
-      v(vCoord) {}
+      normalAtInresectionPoint(normal) {}
   // Does intersection exist
   bool rayIntersectsWithShape;
   // Shape the ray intersects with
@@ -30,7 +26,4 @@ struct RayIntersection {
   float distanceFromRayOrigin;
   // Normal at intersection point
   Vector normalAtInresectionPoint;
-  // Barycentric coordinates for intersections with triangles
-  float	u;
-  float	v;
 };
