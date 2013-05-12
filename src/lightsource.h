@@ -16,46 +16,16 @@ class Scene;
 
 typedef QSharedPointer<LightSource> LightSourcePointer;
 
-enum LightSourceType
-{
-  POINT,
-  DIRECTIONAL,
-  SPOT
-};
-
 struct LightSource {
-  LightSource();
+  public:
+    LightSource(Color ambientIntensity, Color diffuseIntensity, Color specularIntensity);
+    virtual ~LightSource();
 
-  Color calculateColor(const Scene &scene, const Ray &ray, float distance, const Vector &normal, MaterialPointer material) const;
+    virtual Color calculateColor(const Scene &scene, const Ray &ray, float distance, const Vector &normal, MaterialPointer material) const = 0;
 
-  // Type of the light source
-  LightSourceType type;
-
-  // Light position (for spot and point lights)
-  Vector position;
-  // Light direction (for spot and direction lights)
-  Vector direction;
- 
-  // Colors intensity
-  Color	ambientIntensity;
-  Color	diffuseIntensity;
-  Color specularIntensity;
-
-  // Attenuation coefficients (for spot and point lights)
-  float	constantAttenutaionCoefficient;
-  float linearAttenutaionCoefficient;
-  float quadraticAttenutaionCoefficient;
-
-  // Umbra angle (for spot light)
-  float	umbraAngle;
-  // Penumbra angle (for spot light)
-  float	penumbraAngle;
-  // Falloff factor (for spot light)
-  float	falloffFactor;
-
-  // Light range (for directional light)
-  float	range;
-
-  private:
-    float calculateAttenuation(Vector position) const;
+  protected:
+    // Colors intensity
+    Color	mAmbientIntensity;
+    Color	mDiffuseIntensity;
+    Color mSpecularIntensity;
 };

@@ -88,27 +88,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\camera.cpp" />
+    <ClCompile Include="..\src\cone.cpp" />
     <ClCompile Include="..\src\cylinder.cpp" />
+    <ClCompile Include="..\src\directedlight.cpp" />
     <ClCompile Include="..\src\inputparameters.cpp" />
     <ClCompile Include="..\src\lightsource.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\plane.cpp" />
+    <ClCompile Include="..\src\pointlight.cpp" />
     <ClCompile Include="..\src\ray.cpp" />
     <ClCompile Include="..\src\raytracer.cpp" />
     <ClCompile Include="..\src\scene.cpp" />
     <ClCompile Include="..\src\sceneloader.cpp" />
     <ClCompile Include="..\src\sphere.cpp" />
+    <ClCompile Include="..\src\spotlight.cpp" />
     <ClCompile Include="..\src\triangle.cpp" />
-    <ClCompile Include="cone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\camera.h" />
     <ClInclude Include="..\src\cone.h" />
     <ClInclude Include="..\src\cylinder.h" />
+    <ClInclude Include="..\src\directedlight.h" />
     <ClInclude Include="..\src\inputparameters.h" />
     <ClInclude Include="..\src\lightsource.h" />
     <ClInclude Include="..\src\material.h" />
+    <ClInclude Include="..\src\mathcommons.h" />
     <ClInclude Include="..\src\plane.h" />
+    <ClInclude Include="..\src\pointlight.h" />
     <ClInclude Include="..\src\ray.h" />
     <ClInclude Include="..\src\rayintersection.h" />
     <ClInclude Include="..\src\raytracer.h" />
@@ -116,6 +122,7 @@
     <ClInclude Include="..\src\sceneloader.h" />
     <ClInclude Include="..\src\shape.h" />
     <ClInclude Include="..\src\sphere.h" />
+    <ClInclude Include="..\src\spotlight.h" />
     <ClInclude Include="..\src\triangle.h" />
     <ClInclude Include="..\src\types.h" />
   </ItemGroup>

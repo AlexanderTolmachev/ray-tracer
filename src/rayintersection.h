@@ -8,8 +8,6 @@
 #include "types.h"
 #include "shape.h"
 
-#define MAX_DISTANCE_TO_INTERSECTON 1000000000.0
-
 struct RayIntersection {
   RayIntersection() : rayIntersectsWithShape(false), shape(NULL), distanceFromRayOrigin(MAX_DISTANCE_TO_INTERSECTON) {}
   RayIntersection(bool intersectsWithShape, ShapePointer intersectsWith, float distance, Vector normal)
