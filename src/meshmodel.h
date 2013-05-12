@@ -37,13 +37,13 @@ typedef QSharedPointer<MeshModel> MeshModelPointer;
 
 class MeshModel : public Shape {
   public:
-    MeshModel(const std::vector<TrianglePointer> &triangles, const BoundingBox &boundingBox, MaterialPointer material);
+    MeshModel(const std::vector<ModelTrianglePointer> &triangles, const BoundingBox &boundingBox, MaterialPointer material);
     virtual ~MeshModel();
 
     virtual RayIntersection intersectWithRay(const Ray &ray) const;
     virtual Vector getNormal(const Ray &ray, float distance, const RayIntersection &intersection = RayIntersection()) const;
 
   private:
-    std::vector<TrianglePointer> mTriangles;
+    std::vector<ModelTrianglePointer> mTriangles;
     BoundingBox mBoundingBox;
 };

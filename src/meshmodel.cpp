@@ -63,7 +63,7 @@ bool BoundingBox::intersectsWithRay(const Ray &ray) const {
   }
 }
 
-MeshModel::MeshModel(const std::vector<TrianglePointer> &triangles, const BoundingBox &boundingBox, MaterialPointer material)
+MeshModel::MeshModel(const std::vector<ModelTrianglePointer> &triangles, const BoundingBox &boundingBox, MaterialPointer material)
   : Shape(material),
     mTriangles(triangles),
     mBoundingBox(boundingBox) {

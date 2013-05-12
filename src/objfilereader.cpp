@@ -19,13 +19,13 @@ MeshModelPointer ObjFileReader::readMeshFromObjFile(const QString &fileName, con
   std::vector<Vector> normals;
 
   std::vector<Vertex>	  faceVertices;
-  std::vector<unsigned> faceVerticesIndices;
-  std::vector<unsigned> faceIndices;
+  std::vector<int> faceVerticesIndices;
+  std::vector<int> faceIndices;
 
   // Triangle vertices
   std::vector<Vertex>	vertices;
   // Vertex indices for triangles
-  std::vector<unsigned> indices;
+  std::vector<int> indices;
 
   // Read lines, loop will be terminated by break
   while (true) {
@@ -56,10 +56,10 @@ MeshModelPointer ObjFileReader::readMeshFromObjFile(const QString &fileName, con
       QStringList indicesDescs = readIndicesDescriptor(line, "f");
 
       foreach (const QString& index, indicesDescs) {
-        unsigned position, texcoord, normal;
+        int position, texcoord, normal;
         Vertex v;
 
-        readIndices(index, &position, &normal, &texcoord);
+        readIndices(index, position, normal, texcoord);
 
         // OBJ uses 1-based arrays
         if (!positions.empty()) {
@@ -90,7 +90,7 @@ MeshModelPointer ObjFileReader::readMeshFromObjFile(const QString &fileName, con
     }
   }
 
-  std::vector<TrianglePointer> triangles;
+  std::vector<ModelTrianglePointer> triangles;
 
   // Create triangles
   for (int idx = 0, count = indices.size(); idx < count; idx += 3)
@@ -152,9 +152,16 @@ QStringList ObjFileReader::readIndicesDescriptor(QString line, const QString& pr
   return descs;
 }
 
-void ObjFileReader::readIndices(const QString& line, unsigned *position, unsigned *normal, unsigned *textureCoordinates) const {
+void ObjFileReader::readIndices(const QString& line, int &position, int &normal, int &textureCoordinates) const {
   QStringList indices = line.split("/");
-  *position = indices[0].toUInt();
-  *textureCoordinates = indices[1].toUInt();
-  *normal   = indices[2].toUInt();
+  
+  position = indices[0].toUInt();
+
+  if (indices.size() > 1) {
+    textureCoordinates = indices[1].toInt();
+    normal   = indices[2].toInt();
+  } else {
+    textureCoordinates = -1;
+    normal = -1;
+  }
 }

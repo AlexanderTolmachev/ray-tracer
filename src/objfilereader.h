@@ -14,5 +14,5 @@ class ObjFileReader {
   private:
     Vector readVector(QString line, const QString& prefix) const;
     QStringList readIndicesDescriptor(QString line, const QString& prefix) const;
-    void readIndices(const QString& line, unsigned *position, unsigned *normal, unsigned *textureCoordinates) const;
+    void readIndices(const QString& line, int &position, int &normal, int &textureCoordinates) const;
 };
