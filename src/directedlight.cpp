@@ -27,7 +27,7 @@ Color DirectedLight::calculateColor(const Scene &scene, const Ray &ray, float di
     return ambientComponent;
   }
 
-  Ray shadowRay(point + lightVector * EPS, lightVector);	
+  Ray shadowRay(point + lightVector * EPS_FOR_SHADOW_RAYS, lightVector);	
   RayIntersection shadowRayIntersection = scene.calculateFirstIntersection(shadowRay);
   // If object is not in shadow
   if (!shadowRayIntersection.rayIntersectsWithShape) {

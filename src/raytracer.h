@@ -22,8 +22,16 @@ class RayTracer {
   private:
     void render();
     Color traceRay(const Ray &ray, int currentRecursionDepth, bool isRayReflected,
-                   float refractionCoefficient, float reflectionIntencity, 
+                   float environmentDensity, float reflectionIntencity, 
                    RayIntersection &intersection);
+
+    float calculateFrenselCoefficient(const Vector &sourceDirection, 
+                                      float sourceEnvironmentDensity, float targetEnvironmentDensity,
+                                      const Vector &outNormal, bool &isTotalInternalReflection) const;
+    float calculateFrenselCoefficientByFrnsel(float sourceEnvironmentDensity, float targetEnvironmentDensity,
+                                              float cosThetaTSquared, float cosThetaS) const;
+    float calculateFrenselCoefficientByShlick(const Vector &sourceDirection, const Vector &outNormal,
+                                              float sourceEnvironmentDensity, float targetEnvironmentDensity) const;
 
   private:
     ScenePointer mScene;

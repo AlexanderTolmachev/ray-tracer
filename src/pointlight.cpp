@@ -37,7 +37,7 @@ Color PointLight::calculateColor(const Scene &scene, const Ray &ray, float dista
     return result;
   }
 
-  Ray shadowRay(point + shadowRayDirection * EPS, shadowRayDirection);	
+  Ray shadowRay(point + shadowRayDirection * EPS_FOR_SHADOW_RAYS, shadowRayDirection);	
   RayIntersection shadowRayIntersection = scene.calculateNearestIntersection(shadowRay);
   
   // If object is not in shadow

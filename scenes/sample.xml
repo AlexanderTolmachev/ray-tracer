@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <scene>
     <camera>
-        <pos x="0.000" y="8.000" z="20.000"/>
+        <pos x="0.000" y="7.000" z="21.000"/>
         <up  x="0.000" y="1.000" z="0.000"/>
         <look_at x="0.000" y="0.000" z="0.000"/>
         <fov angle="60.000"/>
@@ -9,9 +9,9 @@
     </camera>
 
     <light type="point">
-      <pos x="0.000" y="5.000" z="-3.000"/>
+      <pos x="0.000" y="10.000" z="-3.000"/>
       <ambient_emission  x="0.300" y="0.300" z="0.300"/>
-      <diffuse_emission  x="1.000" y="1.000" z="1.000"/>
+      <diffuse_emission  x="0.50" y="0.50" z="0.50"/>
       <specular_emission x="1.000" y="1.000" z="1.000"/>
       <attenuation const="1.200" linear="0.0500" quad="0.008"/>
     </light> 
@@ -19,7 +19,7 @@
         <pos x="0.00" y="15.00" z="15.000"/>
         <dir x="0.000" y="-1.000" z="-1.000"/>
         <ambient_emission  x="0.50" y="0.50" z="0.50"/>
-        <diffuse_emission  x="1.00" y="1.000" z="1.000"/>
+        <diffuse_emission  x="0.50" y="0.50" z="0.50"/>
         <specular_emission x="1.00" y="1.000" z="1.000"/>
         <attenuation const="1.000" linear="0.0020" quad="0.008"/>
         <umbra angle="15.000"/>
@@ -30,7 +30,7 @@
         <pos x="-10.00" y="10.00" z="10.000"/>
         <dir x="1.000" y="-1.000" z="-1.000"/>
         <ambient_emission  x="0.50" y="0.50" z="0.50"/>
-        <diffuse_emission  x="1.00" y="1.000" z="1.000"/>
+        <diffuse_emission  x="0.50" y="0.50" z="0.50"/>
         <specular_emission x="1.00" y="1.000" z="1.000"/>
         <attenuation const="1.000" linear="0.002" quad="0.008"/>
         <umbra angle="15.000"/>
@@ -41,7 +41,7 @@
         <pos x="10.00" y="10.00" z="10.000"/>
         <dir x="-1.000" y="-1.000" z="-1.000"/>
         <ambient_emission  x="0.50" y="0.50" z="0.50"/>
-        <diffuse_emission  x="1.00" y="1.000" z="1.000"/>
+        <diffuse_emission  x="0.50" y="0.50" z="0.50"/>
         <specular_emission x="1.00" y="1.000" z="1.000"/>
         <attenuation const="1.000" linear="0.002" quad="0.008"/>
         <umbra angle="15.000"/>
@@ -50,28 +50,28 @@
     </light>
 
     <object type="plane">
-      <normal x="0.00" y="1.00" z="0.00"/>
-      <D d="0.00"/>
-      <material>
-        <ambient  x="0.001" y="0.001" z="0.001"/>
-        <diffuse  x="1.000" y="1.000" z="1.000"/>
-        <specular x="1.000" y="1.000" z="1.000"/>
-        <specular_power power="35.0"/>
-        <refraction_coeff theta="0.2"/>
-        <illumination_factors illumination_factor="0.200" reflection_factor="0.010" refraction_factor="0.000"/>
-      </material>		
+        <normal x="0.00" y="1.00" z="0.00"/>
+        <D d="0.00"/>
+        <material>
+            <ambient  x="0.001" y="0.001" z="0.001"/>
+            <diffuse  x="1.000" y="1.000" z="1.000"/>
+            <specular x="1.000" y="1.000" z="1.000"/>
+            <specular_power power="10.0"/>
+            <refraction_coeff theta="10.0"/>
+            <illumination_factors illumination_factor="0.200" reflection_factor="0.75" refraction_factor="0.000"/>
+        </material>		
     </object>
     <object type="plane">
-      <normal x="0.00" y="0.00" z="1.00"/>
-      <D d="10.00"/>
-      <material>
-        <ambient  x="0.001" y="0.001" z="0.001"/>
-        <diffuse  x="1.000" y="1.000" z="1.000"/>
-        <specular x="1.000" y="1.000" z="1.000"/>
-        <specular_power power="35.0"/>
-        <refraction_coeff theta="0.2"/>
-        <illumination_factors illumination_factor="0.200" reflection_factor="0.010" refraction_factor="0.000"/>
-      </material>		
+        <normal x="0.00" y="0.00" z="1.00"/>
+        <D d="10.00"/>
+        <material>
+            <ambient  x="0.001" y="0.001" z="0.001"/>
+            <diffuse  x="1.000" y="1.000" z="1.000"/>
+            <specular x="1.000" y="1.000" z="1.000"/>
+            <specular_power power="10.0"/>
+            <refraction_coeff theta="10.0"/>
+            <illumination_factors illumination_factor="0.200" reflection_factor="0.75" refraction_factor="0.000"/>
+        </material>		
     </object>
     <object type="sphere">
         <center x="7.000" y="2.500" z="7.000"/>

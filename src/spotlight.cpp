@@ -66,7 +66,7 @@ Color SpotLight::calculateColor(const Scene &scene, const Ray &ray, float distan
     return result;
   }
 
-  Ray shadowRay(point + lightVector * EPS, lightVector);	
+  Ray shadowRay(point + lightVector * EPS_FOR_SHADOW_RAYS, lightVector);	
   RayIntersection shadowRayIntersection = scene.calculateFirstIntersection(shadowRay);
 
   // Object not in the shadow
