@@ -109,7 +109,7 @@
             <specular_power power="10.0"/>
             <refraction_coeff theta="1000.3"/>
             <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-        </material>		
+        </material>		    
     </object>
 
     <object type="triangle">
@@ -128,7 +128,7 @@
     <object type="triangle">
         <v0 x="-2.000" y="0.000" z="9.000"/>
         <v1 x="-2.000" y="0.000" z="13.000"/>
-        <v2 x="0.000" y="2.50" z="11.000"/>
+        <v2 x="0.000" y="2.50" z="11.000"/>        
         <material>
             <ambient  x="0.123" y="0.023" z="0.023"/>
             <diffuse  x="0.812" y="0.012" z="0.012"/>

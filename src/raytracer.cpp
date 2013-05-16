@@ -78,10 +78,8 @@ Color RayTracer::traceRay(const Ray &ray, int currentRecursionDepth, bool isRayR
 
   intersection = mScene->calculateNearestIntersection(ray);
   
-  if (!intersection.rayIntersectsWithShape)
-  {
-    if (isRayReflected)
-    {
+  if (!intersection.rayIntersectsWithShape) {
+    if (isRayReflected) {
       return Color();
     }
     return mScene->getBackgroundMaterial()->ambientColor;
@@ -94,13 +92,13 @@ Color RayTracer::traceRay(const Ray &ray, int currentRecursionDepth, bool isRayR
 
   Color pixelColor = mScene->calculateIlluminationColor(ray, intersection.distanceFromRayOrigin, normal, shapeMaterial);
 
-  // Process reflection and refraction
+  /* Process reflection and refraction */
+
   Vector rayDirection = ray.getDirection();
   float viewProjection = rayDirection.dotProduct(normal);
   // Turn normal to the front side
   Vector outNormal = normal;
-  if (viewProjection > 0.0)
-  {
+  if (viewProjection > 0.0) {
     outNormal = -normal;
   }
 
@@ -109,19 +107,39 @@ Color RayTracer::traceRay(const Ray &ray, int currentRecursionDepth, bool isRayR
   float fresnel = calculateFrenselCoefficient(rayDirection, environmentDensity, shapeMaterial->densityFactor, outNormal, isTotalInternalReflection);
 
   // Calculate reflection
-  if (shapeMaterial->reflectionFactor > 0.0 && reflectionIntensity > EPS_FOR_REFLECTION_RAYS)
-  {
+  if (shapeMaterial->reflectionFactor > 0.0 && reflectionIntensity > EPS_FOR_REFLECTION_RAYS) {
     // Reflect ray	
     Vector reflectedRayDirection = rayDirection - outNormal * 2.0 * rayDirection.dotProduct(outNormal);
-    RayIntersection reflected;
+    RayIntersection reflectedRayIntersection;
     Color reflectedColor = traceRay(Ray(intersectionPoint + reflectedRayDirection * EPS_FOR_REFLECTION_RAYS, reflectedRayDirection), 
                                      currentRecursionDepth + 1,
                                      true,
                                      shapeMaterial->densityFactor,
                                      reflectionIntensity * shapeMaterial->reflectionFactor,      
-                                     reflected);
+                                     reflectedRayIntersection);
     reflectedColor *=  reflectionIntensity * shapeMaterial->reflectionFactor * fresnel;
     pixelColor += componentwiseProduct(reflectedColor, shapeMaterial->diffuseColor);
+  }
+
+  // Calculate refraction
+  if (shapeMaterial->refractionFactor > 0.0) {
+    float shapeDensity	= shapeMaterial->densityFactor;
+    Vector reflectedRayDirection = claculateRefractedRayDirection(rayDirection, outNormal, environmentDensity, shapeDensity, isTotalInternalReflection);
+    if (!isTotalInternalReflection) {
+      RayIntersection	refractedRayIntersection;
+      Color refracted  = traceRay(Ray(intersectionPoint + reflectedRayDirection * EPS_FOR_REFLECTION_RAYS, reflectedRayDirection), 
+                                  currentRecursionDepth + 1,
+                                  true,
+                                  shapeDensity, 
+                                  reflectionIntensity,         
+                                  refractedRayIntersection);
+      // Use Burger-Lambert-Beer law
+      if (refractedRayIntersection.rayIntersectsWithShape) {
+        Color absorbance   = (shapeMaterial->diffuseColor) * 0.15f * (-refractedRayIntersection.distanceFromRayOrigin);
+        Color transparency = Color(expf(absorbance.r), expf(absorbance.g), expf(absorbance.b));
+        pixelColor += componentwiseProduct(refracted,  transparency) * (1.0 - fresnel);
+      }
+    }
   }
 
   return pixelColor;
@@ -150,22 +168,39 @@ float RayTracer::calculateFrenselCoefficient(const Vector &sourceDirection,
 float RayTracer::calculateFrenselCoefficientByFrnsel(float sourceEnvironmentDensity, float targetEnvironmentDensity,
                                                      float cosThetaTSquared, float cosThetaS) const {
 
-		cosThetaTSquared = sqrtf(cosThetaTSquared);
+	cosThetaTSquared = sqrtf(cosThetaTSquared);
 
-		// Calculate coefficients for s- and p-polarized light
-		float Rs = (sourceEnvironmentDensity * cosThetaS - targetEnvironmentDensity * cosThetaTSquared) / (sourceEnvironmentDensity * cosThetaS + targetEnvironmentDensity * cosThetaTSquared);
-		Rs *= Rs;
-		float Rp = (sourceEnvironmentDensity * cosThetaTSquared - targetEnvironmentDensity * cosThetaS) / (sourceEnvironmentDensity * cosThetaTSquared + targetEnvironmentDensity * cosThetaS);
-		Rp *= Rp;
+	// Calculate coefficients for s- and p-polarized light
+	float Rs = (sourceEnvironmentDensity * cosThetaS - targetEnvironmentDensity * cosThetaTSquared) / (sourceEnvironmentDensity * cosThetaS + targetEnvironmentDensity * cosThetaTSquared);
+	Rs *= Rs;
+	float Rp = (sourceEnvironmentDensity * cosThetaTSquared - targetEnvironmentDensity * cosThetaS) / (sourceEnvironmentDensity * cosThetaTSquared + targetEnvironmentDensity * cosThetaS);
+	Rp *= Rp;
 
-		return 0.5 * (Rs + Rp);
+	return 0.5 * (Rs + Rp);
 }
 
 float RayTracer::calculateFrenselCoefficientByShlick(const Vector &sourceDirection, const Vector &outNormal,
                                                      float sourceEnvironmentDensity, float targetEnvironmentDensity) const {
-		float r = ((sourceEnvironmentDensity - targetEnvironmentDensity) * (sourceEnvironmentDensity - targetEnvironmentDensity)) / 
-			        ((sourceEnvironmentDensity + targetEnvironmentDensity) * (sourceEnvironmentDensity + targetEnvironmentDensity));
-		float dirDotNormal = 1 + sourceDirection.dotProduct(outNormal);
+	float r = ((sourceEnvironmentDensity - targetEnvironmentDensity) * (sourceEnvironmentDensity - targetEnvironmentDensity)) / 
+			      ((sourceEnvironmentDensity + targetEnvironmentDensity) * (sourceEnvironmentDensity + targetEnvironmentDensity));
+	float dirDotNormal = 1 + sourceDirection.dotProduct(outNormal);
 
-		return r + (1 - r) * pow(dirDotNormal, 5);
+	return r + (1 - r) * pow(dirDotNormal, 5);
+}
+
+Vector RayTracer::claculateRefractedRayDirection(const Vector &originalRayDirection, const Vector &outNormal,
+                                                 float sourceEnvironmentDensity, float targetEnvironmentDensity,
+                                                 bool &isTotalInternalReflection) const {
+	float nue				 = sourceEnvironmentDensity / targetEnvironmentDensity;
+	float cosThetaS  = -outNormal.dotProduct(originalRayDirection);
+	float cosThetaTSquared = 1.f - nue * nue * (1.f - cosThetaS * cosThetaS);
+
+	if (cosThetaTSquared < 0.f) {
+		isTotalInternalReflection = true;
+		return Vector();
+	}
+
+  Vector reflectedRayDirection = (originalRayDirection * nue) + outNormal * (nue * cosThetaS - sqrtf(cosThetaTSquared));
+  reflectedRayDirection.normalize();
+	return reflectedRayDirection;
 }

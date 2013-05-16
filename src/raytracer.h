@@ -33,6 +33,10 @@ class RayTracer {
     float calculateFrenselCoefficientByShlick(const Vector &sourceDirection, const Vector &outNormal,
                                               float sourceEnvironmentDensity, float targetEnvironmentDensity) const;
 
+    Vector claculateRefractedRayDirection(const Vector &originalRayDirection, const Vector &outNormal,
+                                          float sourceEnvironmentDensity, float targetEnvironmentDensity,
+                                          bool &isTotalInternalReflection) const;
+
   private:
     ScenePointer mScene;
     QImage mRenderedImage;
