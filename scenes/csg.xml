@@ -19,7 +19,7 @@
         <pos x="0.00" y="15.00" z="15.000"/>
         <dir x="0.000" y="-1.000" z="-1.000"/>
         <ambient_emission  x="0.50" y="0.50" z="0.50"/>
-        <diffuse_emission  x="0.50" y="0.50" z="0.50"/>
+        <diffuse_emission  x="0.750" y="0.750" z="0.570"/>
         <specular_emission x="1.00" y="1.000" z="1.000"/>
         <attenuation const="1.000" linear="0.0020" quad="0.008"/>
         <umbra angle="15.000"/>
@@ -89,7 +89,7 @@
                                 <specular x="1.000" y="1.000" z="1.000"/>
                                 <specular_power power="10.0"/>
                                 <refraction_coeff theta="1000.3"/>
-                                <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
+                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
                             </material>		
                         </object>            
                     </left>
@@ -104,7 +104,7 @@
                                 <specular x="1.000" y="1.000" z="1.000"/>
                                 <specular_power power="10.0"/>
                                 <refraction_coeff theta="1000.3"/>
-                                <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
+                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
                             </material>		
                         </object>            
                     </right>
@@ -120,7 +120,7 @@
                         <specular x="1.000" y="1.000" z="1.000"/>
                         <specular_power power="10.0"/>
                         <refraction_coeff theta="1000.3"/>
-                        <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
+                        <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
                     </material>		
                 </object>
             </right>            
@@ -141,7 +141,7 @@
                                 <specular x="1.000" y="1.000" z="1.000"/>
                                 <specular_power power="7.0"/>
                                 <refraction_coeff theta="1.1"/>
-                                <illumination_factors illumination_factor="0.200" reflection_factor="0.750" refraction_factor="0.000"/>
+                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
                             </material>		
                         </object>
                     </left>
@@ -155,7 +155,7 @@
                                 <specular x="1.000" y="1.000" z="1.000"/>
                                 <specular_power power="7.0"/>
                                 <refraction_coeff theta="1.1"/>
-                                <illumination_factors illumination_factor="0.200" reflection_factor="0.750" refraction_factor="0.000"/>
+                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
                             </material>		
                         </object>
                     </right>            
