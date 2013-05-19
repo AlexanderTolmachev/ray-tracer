@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <scene>
     <camera>
-        <pos x="0.000" y="10.000" z="20.000"/>
+        <pos x="0.000" y="8.000" z="20.000"/>
         <up  x="0.000" y="1.000" z="0.000"/>
         <look_at x="0.000" y="0.000" z="0.000"/>
         <fov angle="60.000"/>
@@ -74,47 +74,15 @@
         </material>		
     </object>
 
-     <csg>
-        <operation type="difference">
-            <left>
-                <operation type="intersection">
-                    <left>
-                        <object type="box">
-                            <min x="-2.000" y="1.000" z="3.000"/>
-                            <max x="2.000" y="5.000" z="7.000"/>
-                            <material>
-                                <ambient  x="0.023" y="0.123" z="0.123"/>
-                                <diffuse  x="0.012" y="0.812" z="0.812"/>
-                                <specular x="1.000" y="1.000" z="1.000"/>
-                                <specular_power power="10.0"/>
-                                <refraction_coeff theta="1000.3"/>
-                                <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
-                            </material>		    
-                        </object>
-                    </left>
-                    <right>
-                        <object type="sphere">
-                            <center x="0.000" y="3.00" z="5.000"/>
-                            <radius r="2.5"/>
-                            <material>
-                                <ambient  x="0.123" y="0.023" z="0.123"/>
-                                <diffuse  x="0.812" y="0.012" z="0.812"/>
-                                <specular x="1.000" y="1.000" z="1.000"/>
-                                <specular_power power="10.0"/>
-                                <refraction_coeff theta="1000.3"/>
-                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                            </material>		
-                        </object>
-                    </right>            
-                </operation>                
-            </left>
-            <right>
+    <csg>
+        <operation type="intersection">
+            <left>        
                 <operation type="union">
                     <left>
-                        <object type="cylinder">
-                            <top x="0.000" y="5.100" z="5.000"/>
-                            <bottom x="0.000" y="0.900" z="5.000"/>
-                            <radius r="1.0"/>
+                        <object type="cone">
+                            <top x="0.000" y="6.000" z="1.50"/>
+                            <bottom x="0.000" y="0.00" z="1.50"/>
+                            <radius r="2.5"/>
                             <material>
                                 <ambient  x="0.123" y="0.123" z="0.023"/>
                                 <diffuse  x="0.812" y="0.812" z="0.012"/>
@@ -126,65 +94,26 @@
                         </object>            
                     </left>
                     <right>
-                        <operation type="union">
-                            <left>
-                                <object type="cylinder">
-                                    <top x="0.000" y="3.000" z="2.900"/>
-                                    <bottom x="0.000" y="3.000" z="7.100"/>
-                                    <radius r="1.0"/>
-                                    <material>
-                                        <ambient  x="0.123" y="0.123" z="0.023"/>
-                                        <diffuse  x="0.812" y="0.812" z="0.012"/>
-                                        <specular x="1.000" y="1.000" z="1.000"/>
-                                        <specular_power power="10.0"/>
-                                        <refraction_coeff theta="1000.3"/>
-                                        <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
-                                    </material>		
-                                </object>            
-                            </left>
-                            <right>
-                                <object type="cylinder">
-                                    <top x="-2.100" y="3.000" z="5.000"/>
-                                    <bottom x="2.100" y="3.000" z="5.000"/>
-                                    <radius r="1.0"/>
-                                    <material>
-                                        <ambient  x="0.123" y="0.123" z="0.023"/>
-                                        <diffuse  x="0.812" y="0.812" z="0.012"/>
-                                        <specular x="1.000" y="1.000" z="1.000"/>
-                                        <specular_power power="10.0"/>
-                                        <refraction_coeff theta="1000.3"/>
-                                        <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
-                                    </material>		
-                                </object>                                    
-                            </right>
-                        </operation>                
+                        <object type="cone">
+                            <top x="0.000" y="0.000" z="1.50"/>
+                            <bottom x="0.000" y="6.00" z="1.50"/>
+                            <radius r="2.3"/>
+                            <material>
+                                <ambient  x="0.123" y="0.123" z="0.023"/>
+                                <diffuse  x="0.812" y="0.812" z="0.012"/>
+                                <specular x="1.000" y="1.000" z="1.000"/>
+                                <specular_power power="10.0"/>
+                                <refraction_coeff theta="1000.3"/>
+                                <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
+                            </material>		
+                        </object>            
                     </right>
-                </operation>                        
-            </right>        
-        </operation>         
-    </csg>
-   
-    <csg>
-        <operation type="intersection">
-            <left>
-                <object type="cone">
-                    <top x="7.000" y="7.000" z="8.00"/>
-                    <bottom x="7.000" y="0.00" z="8.00"/>
-                    <radius r="1.5"/>
-                    <material>
-                        <ambient  x="0.123" y="0.123" z="0.023"/>
-                        <diffuse  x="0.812" y="0.812" z="0.012"/>
-                        <specular x="1.000" y="1.000" z="1.000"/>
-                        <specular_power power="10.0"/>
-                        <refraction_coeff theta="1000.3"/>
-                        <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
-                    </material>		
-                </object>            
+                </operation>      
             </left>
             <right>
                 <object type="box">
-                    <min x="6.000" y="0.000" z="7.000"/>
-                    <max x="8.000" y="4.000" z="9.000"/>
+                    <min x="-2.000" y="0.001" z="-0.500"/>
+                    <max x="2.000" y="6.001" z="3.500"/>
                     <material>
                         <ambient  x="0.123" y="0.123" z="0.023"/>
                         <diffuse  x="0.812" y="0.812" z="0.012"/>
@@ -195,12 +124,102 @@
                     </material>		
                 </object>
             </right>            
-        </operation>                
+        </operation>                      
     </csg>
-    
+        
     <csg>
-        <operation type="intersection">
-            <left>                
+        <operation type="difference">
+            <left>
+                <operation type="intersection">
+                    <left>
+                        <object type="box">
+                            <min x="5.000" y="1.000" z="3.000"/>
+                            <max x="9.000" y="5.000" z="7.000"/>
+                            <material>
+                                <ambient  x="0.023" y="0.054" z="1.000"/>
+                                <diffuse  x="0.023" y="0.051" z="1.000"/>
+                                <specular x="1.000" y="1.000" z="1.000"/>
+                                <specular_power power="7.0"/>
+                                <refraction_coeff theta="1.1"/>
+                                <illumination_factors illumination_factor="0.200" reflection_factor="0.750" refraction_factor="0.000"/>
+                            </material>		
+                        </object>
+                    </left>
+                    <right>
+                        <object type="sphere">
+                            <center x="7.000" y="3.00" z="5.000"/>
+                            <radius r="2.5"/>
+                            <material>
+                                <ambient  x="0.023" y="0.054" z="1.000"/>
+                                <diffuse  x="0.023" y="0.051" z="1.000"/>
+                                <specular x="1.000" y="1.000" z="1.000"/>
+                                <specular_power power="7.0"/>
+                                <refraction_coeff theta="1.1"/>
+                                <illumination_factors illumination_factor="0.200" reflection_factor="0.750" refraction_factor="0.000"/>
+                            </material>		
+                        </object>
+                    </right>            
+                </operation>                
+            </left>
+            <right>
+                <operation type="union">
+                    <left>
+                        <object type="cylinder">
+                            <top x="7.000" y="5.001" z="5.000"/>
+                            <bottom x="7.000" y="0.999" z="5.000"/>
+                            <radius r="1.0"/>
+                            <material>
+                                <ambient  x="0.023" y="0.123" z="0.123"/>
+                                <diffuse  x="0.012" y="0.812" z="0.812"/>
+                                <specular x="1.000" y="1.000" z="1.000"/>
+                                <specular_power power="10.0"/>
+                                <refraction_coeff theta="1000.3"/>
+                                <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
+                            </material>		    
+                        </object>            
+                    </left>
+                    <right>
+                        <operation type="union">
+                            <left>
+                                <object type="cylinder">
+                                    <top x="7.000" y="3.000" z="2.999"/>
+                                    <bottom x="7.000" y="3.000" z="7.01"/>
+                                    <radius r="1.0"/>
+                                    <material>
+                                        <ambient  x="0.023" y="0.123" z="0.123"/>
+                                        <diffuse  x="0.012" y="0.812" z="0.812"/>
+                                        <specular x="1.000" y="1.000" z="1.000"/>
+                                        <specular_power power="10.0"/>
+                                        <refraction_coeff theta="1000.3"/>
+                                        <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
+                                    </material>		    
+                                </object>            
+                            </left>
+                            <right>
+                                <object type="cylinder">
+                                    <top x="4.999" y="3.000" z="5.000"/>
+                                    <bottom x="9.001" y="3.000" z="5.000"/>
+                                    <radius r="1.0"/>
+                                    <material>
+                                        <ambient  x="0.023" y="0.123" z="0.123"/>
+                                        <diffuse  x="0.012" y="0.812" z="0.812"/>
+                                        <specular x="1.000" y="1.000" z="1.000"/>
+                                        <specular_power power="10.0"/>
+                                        <refraction_coeff theta="1000.3"/>
+                                        <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
+                                    </material>		    
+                                </object>                                    
+                            </right>
+                        </operation>                
+                    </right>
+                </operation>                        
+            </right>        
+        </operation>         
+    </csg>
+       
+    <csg>
+        <operation type="difference">
+            <left>            
                 <operation type="difference">
                     <left>            
                         <operation type="difference">
@@ -212,43 +231,25 @@
                                                 <operation type="difference">
                                                     <left>            
                                                         <operation type="difference">
-                                                            <left>            
+                                                            <left>
                                                                 <operation type="difference">
                                                                     <left>
-                                                                        <operation type="difference">
-                                                                            <left>
-                                                                                <object type="box">
-                                                                                    <min x="-9.000" y="5.000" z="5.000"/>
-                                                                                    <max x="-5.000" y="1.000" z="9.000"/>
-                                                                                    <material>
-                                                                                        <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                                                        <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                                                        <specular x="1.000" y="1.000" z="1.000"/>
-                                                                                        <specular_power power="100.0"/>
-                                                                                        <refraction_coeff theta="1000.3"/>
-                                                                                        <illumination_factors illumination_factor="0.200" reflection_factor="0.00" refraction_factor="0.000"/>
-                                                                                    </material>		
-                                                                                </object>            
-                                                                            </left>
-                                                                            <right>
-                                                                                <object type="sphere">
-                                                                                    <center x="-5.000" y="1.00" z="9.000"/>
-                                                                                    <radius r="2.0"/>
-                                                                                    <material>
-                                                                                        <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                                                        <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                                                        <specular x="1.000" y="1.000" z="1.000"/>
-                                                                                        <specular_power power="100.0"/>
-                                                                                        <refraction_coeff theta="1000.3"/>
-                                                                                        <illumination_factors illumination_factor="0.200" reflection_factor="0.00" refraction_factor="0.000"/>
-                                                                                    </material>		
-                                                                                </object>                                                            
-                                                                            </right>
-                                                                        </operation>            
+                                                                        <object type="box">
+                                                                            <min x="-9.000" y="5.000" z="3.000"/>
+                                                                            <max x="-5.000" y="1.000" z="7.000"/>
+                                                                            <material>
+                                                                                <ambient  x="0.123" y="0.023" z="0.023"/>
+                                                                                <diffuse  x="0.812" y="0.012" z="0.012"/>
+                                                                                <specular x="1.000" y="1.000" z="1.000"/>
+                                                                                <specular_power power="100.0"/>
+                                                                                <refraction_coeff theta="1000.3"/>
+                                                                                <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
+                                                                            </material>		
+                                                                        </object>            
                                                                     </left>
                                                                     <right>
                                                                         <object type="sphere">
-                                                                            <center x="-9.000" y="1.00" z="9.000"/>
+                                                                            <center x="-5.000" y="1.00" z="7.000"/>
                                                                             <radius r="2.0"/>
                                                                             <material>
                                                                                 <ambient  x="0.123" y="0.023" z="0.023"/>
@@ -258,13 +259,13 @@
                                                                                 <refraction_coeff theta="1000.3"/>
                                                                                 <illumination_factors illumination_factor="0.200" reflection_factor="0.00" refraction_factor="0.000"/>
                                                                             </material>		
-                                                                        </object>                                                                                    
+                                                                        </object>                                                            
                                                                     </right>
-                                                                </operation>
+                                                                </operation>            
                                                             </left>
                                                             <right>
                                                                 <object type="sphere">
-                                                                    <center x="-5.000" y="5.00" z="9.000"/>
+                                                                    <center x="-9.000" y="1.00" z="7.000"/>
                                                                     <radius r="2.0"/>
                                                                     <material>
                                                                         <ambient  x="0.123" y="0.023" z="0.023"/>
@@ -274,13 +275,13 @@
                                                                         <refraction_coeff theta="1000.3"/>
                                                                         <illumination_factors illumination_factor="0.200" reflection_factor="0.00" refraction_factor="0.000"/>
                                                                     </material>		
-                                                                </object>                                                                                                    
+                                                                </object>                                                                                    
                                                             </right>
                                                         </operation>
                                                     </left>
                                                     <right>
                                                         <object type="sphere">
-                                                            <center x="-9.000" y="5.00" z="9.000"/>
+                                                            <center x="-5.000" y="5.00" z="7.000"/>
                                                             <radius r="2.0"/>
                                                             <material>
                                                                 <ambient  x="0.123" y="0.023" z="0.023"/>
@@ -290,13 +291,13 @@
                                                                 <refraction_coeff theta="1000.3"/>
                                                                 <illumination_factors illumination_factor="0.200" reflection_factor="0.00" refraction_factor="0.000"/>
                                                             </material>		
-                                                        </object>                                                                                                                                    
+                                                        </object>                                                                                                    
                                                     </right>
-                                                </operation>          
+                                                </operation>
                                             </left>
                                             <right>
                                                 <object type="sphere">
-                                                    <center x="-5.000" y="1.00" z="5.000"/>
+                                                    <center x="-9.000" y="5.00" z="7.000"/>
                                                     <radius r="2.0"/>
                                                     <material>
                                                         <ambient  x="0.123" y="0.023" z="0.023"/>
@@ -308,11 +309,11 @@
                                                     </material>		
                                                 </object>                                                                                                                                    
                                             </right>
-                                        </operation>                          
+                                        </operation>          
                                     </left>
                                     <right>
                                         <object type="sphere">
-                                            <center x="-9.000" y="1.00" z="5.000"/>
+                                            <center x="-5.000" y="1.00" z="3.000"/>
                                             <radius r="2.0"/>
                                             <material>
                                                 <ambient  x="0.123" y="0.023" z="0.023"/>
@@ -322,13 +323,13 @@
                                                 <refraction_coeff theta="1000.3"/>
                                                 <illumination_factors illumination_factor="0.200" reflection_factor="0.00" refraction_factor="0.000"/>
                                             </material>		
-                                        </object>                                                                                                                                                                        
+                                        </object>                                                                                                                                    
                                     </right>
                                 </operation>                          
                             </left>
                             <right>
                                 <object type="sphere">
-                                    <center x="-5.000" y="5.00" z="5.000"/>
+                                    <center x="-9.000" y="1.00" z="3.000"/>
                                     <radius r="2.0"/>
                                     <material>
                                         <ambient  x="0.123" y="0.023" z="0.023"/>
@@ -340,11 +341,11 @@
                                     </material>		
                                 </object>                                                                                                                                                                        
                             </right>
-                        </operation>                                          
+                        </operation>                          
                     </left>
                     <right>
                         <object type="sphere">
-                            <center x="-9.000" y="5.00" z="5.000"/>
+                            <center x="-5.000" y="5.00" z="3.000"/>
                             <radius r="2.0"/>
                             <material>
                                 <ambient  x="0.123" y="0.023" z="0.023"/>
@@ -354,13 +355,13 @@
                                 <refraction_coeff theta="1000.3"/>
                                 <illumination_factors illumination_factor="0.200" reflection_factor="0.00" refraction_factor="0.000"/>
                             </material>		
-                        </object>                                                                                                                                                                                                
+                        </object>                                                                                                                                                                        
                     </right>
                 </operation>                                          
             </left>
             <right>
                 <object type="sphere">
-                    <center x="-7.000" y="3.00" z="7.000"/>
+                    <center x="-9.000" y="5.00" z="3.000"/>
                     <radius r="2.0"/>
                     <material>
                         <ambient  x="0.123" y="0.023" z="0.023"/>
@@ -370,204 +371,11 @@
                         <refraction_coeff theta="1000.3"/>
                         <illumination_factors illumination_factor="0.200" reflection_factor="0.00" refraction_factor="0.000"/>
                     </material>		
-                </object>                                                                                                                                                                                                            
+                </object>                                                                                                                                                                                                
             </right>
-        </operation>                                                          
+        </operation>                                          
     </csg>
-    
-<!--     <csg>
-        <operation type="difference">
-            <left>
-                <object type="box">
-                    <min x="-9.000" y="5.000" z="5.000"/>
-                    <max x="-5.000" y="1.000" z="9.000"/>
-                    <material>
-                        <ambient  x="0.123" y="0.023" z="0.023"/>
-                        <diffuse  x="0.812" y="0.012" z="0.012"/>
-                        <specular x="1.000" y="1.000" z="1.000"/>
-                        <specular_power power="100.0"/>
-                        <refraction_coeff theta="1000.3"/>
-                        <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                    </material>		
-                </object>            
-            </left>
-            <right>
-                <operation type="union">
-                    <left>
-                        <operation type="union">
-                            <left>
-                                <operation type="union">
-                                    <left>
-                                        <object type="sphere">
-                                            <center x="-5.000" y="1.00" z="9.000"/>
-                                            <radius r="2.0"/>
-                                            <material>
-                                                <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                <specular x="1.000" y="1.000" z="1.000"/>
-                                                <specular_power power="100.0"/>
-                                                <refraction_coeff theta="1000.3"/>
-                                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                                            </material>		
-                                        </object>                                                
-                                    </left>
-                                    <right>
-                                        <object type="sphere">
-                                            <center x="-9.000" y="1.00" z="9.000"/>
-                                            <radius r="2.0"/>
-                                            <material>
-                                                <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                <specular x="1.000" y="1.000" z="1.000"/>
-                                                <specular_power power="100.0"/>
-                                                <refraction_coeff theta="1000.3"/>
-                                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                                            </material>		
-                                        </object>                                                                                    
-                                    </right>                    
-                                </operation>                                                
-                            </left>
-                            <right>
-                                <operation type="union">
-                                    <left>
-                                        <object type="sphere">
-                                            <center x="-5.000" y="5.00" z="9.000"/>
-                                            <radius r="2.0"/>
-                                            <material>
-                                                <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                <specular x="1.000" y="1.000" z="1.000"/>
-                                                <specular_power power="100.0"/>
-                                                <refraction_coeff theta="1000.3"/>
-                                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                                            </material>		
-                                        </object>                                                                                    
-                                    </left>
-                                    <right>
-                                        <object type="sphere">
-                                            <center x="-9.000" y="5.00" z="9.000"/>
-                                            <radius r="2.0"/>
-                                            <material>
-                                                <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                <specular x="1.000" y="1.000" z="1.000"/>
-                                                <specular_power power="100.0"/>
-                                                <refraction_coeff theta="1000.3"/>
-                                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                                            </material>		
-                                        </object>                                                                                                                        
-                                    </right>                    
-                                </operation>                                                
-                            </right>                    
-                        </operation>                                        
-                    </left>
-                    <right>
-                        <operation type="union">
-                            <left>
-                                <operation type="union">
-                                    <left>
-                                        <object type="sphere">
-                                            <center x="-5.000" y="1.00" z="5.000"/>
-                                            <radius r="2.0"/>
-                                            <material>
-                                                <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                <specular x="1.000" y="1.000" z="1.000"/>
-                                                <specular_power power="100.0"/>
-                                                <refraction_coeff theta="1000.3"/>
-                                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                                            </material>		
-                                        </object>                                                                                                                        
-                                    </left>
-                                    <right>
-                                        <object type="sphere">
-                                            <center x="-9.000" y="1.00" z="5.000"/>
-                                            <radius r="2.0"/>
-                                            <material>
-                                                <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                <specular x="1.000" y="1.000" z="1.000"/>
-                                                <specular_power power="100.0"/>
-                                                <refraction_coeff theta="1000.3"/>
-                                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                                            </material>		
-                                        </object>                                                                                                                                                            
-                                    </right>                    
-                                </operation>                                                
-                            </left>
-                            <right>
-                                <operation type="union">
-                                    <left>
-                                        <object type="sphere">
-                                            <center x="-5.000" y="5.00" z="5.000"/>
-                                            <radius r="2.0"/>
-                                            <material>
-                                                <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                <specular x="1.000" y="1.000" z="1.000"/>
-                                                <specular_power power="100.0"/>
-                                                <refraction_coeff theta="1000.3"/>
-                                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                                            </material>		
-                                        </object>                                                                                                                                                            
-                                    </left>
-                                    <right>
-                                        <object type="sphere">
-                                            <center x="-9.000" y="5.00" z="5.000"/>
-                                            <radius r="2.0"/>
-                                            <material>
-                                                <ambient  x="0.123" y="0.023" z="0.023"/>
-                                                <diffuse  x="0.812" y="0.012" z="0.012"/>
-                                                <specular x="1.000" y="1.000" z="1.000"/>
-                                                <specular_power power="100.0"/>
-                                                <refraction_coeff theta="1000.3"/>
-                                                <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                                            </material>		
-                                        </object>                                                                                                                                                                                                
-                                    </right>                    
-                                </operation>                                                
-                            </right>                    
-                        </operation>                                        
-                    </right>                    
-                </operation>                    
-            </right>                        
-        </operation>                    
-    </csg>
- -->
-<!--      <csg>
-        <operation type="intersection">
-            <left>
-                <object type="box">
-                    <min x="-9.000" y="0.500" z="0.000"/>
-                    <max x="-5.000" y="4.500" z="4.000"/>
-                    <material>
-                        <ambient  x="0.023" y="0.123" z="0.123"/>
-                        <diffuse  x="0.012" y="0.812" z="0.812"/>
-                        <specular x="1.000" y="1.000" z="1.000"/>
-                        <specular_power power="10.0"/>
-                        <refraction_coeff theta="1000.3"/>
-                        <illumination_factors illumination_factor="0.200" reflection_factor="0.50" refraction_factor="0.000"/>
-                    </material>		    
-                </object>
-            </left>
-            <right>
-                <object type="sphere">
-                    <center x="-7.000" y="2.50" z="2.000"/>
-                    <radius r="2.5"/>
-                    <material>
-                        <ambient  x="0.123" y="0.023" z="0.123"/>
-                        <diffuse  x="0.812" y="0.012" z="0.812"/>
-                        <specular x="1.000" y="1.000" z="1.000"/>
-                        <specular_power power="10.0"/>
-                        <refraction_coeff theta="1000.3"/>
-                        <illumination_factors illumination_factor="0.200" reflection_factor="1.00" refraction_factor="0.000"/>
-                    </material>		
-                </object>
-            </right>            
-        </operation>                
-    </csg>
- -->
-           
+               
     <background>
         <material>
             <ambient  x="0.000" y="0.000" z="0.000"/>
