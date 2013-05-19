@@ -18,3 +18,6 @@ Sample images
 
 ####Scene with mesh model
 ![alt text](https://raw.github.com/AlexanderTolmachev/ray-tracer/master/images/model.png "Scene with mesh model")
+
+####Scene demonstrating constructive solid geometry operations
+![alt text](https://raw.github.com/AlexanderTolmachev/ray-tracer/master/images/csg.png "Scene demonstrating constructive solid geometry operations")
