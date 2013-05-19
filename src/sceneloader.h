@@ -16,7 +16,11 @@
 #include "cylinder.h"
 #include "cone.h"
 #include "triangle.h"
+#include "box.h"
 #include "meshmodel.h"
+#include "csgtree.h"
+#include "csgbinaryoperationnode.h"
+#include "csgshapenode.h"
 
 class SceneLoader {
   public:
@@ -31,6 +35,7 @@ class SceneLoader {
     CameraPointer readCamera(const QDomElement &element) const;
     LightSourcePointer readLightSource(const QDomElement &element) const;
     ShapePointer readShape(const QDomElement &element) const;
+    CSGTreePointer readCSGTree(const QDomElement &element) const;
     MaterialPointer readMaterial(const QDomElement &element) const;
 
     DirectedLightPointer readDirectedLight(const QDomElement &element, const Color &ambientIntensity, const Color &diffuseIntensity, const Color &specularIntensity) const;
@@ -42,7 +47,12 @@ class SceneLoader {
     CylinderPointer readCylinder(const QDomElement &element, MaterialPointer material) const;
     ConePointer readCone(const QDomElement &element, MaterialPointer material) const;
     TrianglePointer readTriangle(const QDomElement &element, MaterialPointer material) const;
+    BoxPointer readBox(const QDomElement &element, MaterialPointer material) const;
     MeshModelPointer readMeshModel(const QDomElement &element, MaterialPointer material) const;
+
+    CSGNodePointer readCSGNode(const QDomElement &element) const;
+    CSGBinaryOperationNodePointer readCSGOperationNode(const QDomElement &element) const;
+    CSGShapeNodePointer readCSGShapeNode(const QDomElement &element) const;
 
     bool readVector(const QDomElement &element, Vector &vector) const;
     bool readAttributeAsFloat(const QDomElement &element, const QString &attributeName, float &value) const;

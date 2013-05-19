@@ -87,8 +87,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\box.cpp" />
     <ClCompile Include="..\src\camera.cpp" />
     <ClCompile Include="..\src\cone.cpp" />
+    <ClCompile Include="..\src\csgdifferenceoperation.cpp" />
+    <ClCompile Include="..\src\csgintersectionoperation.cpp" />
+    <ClCompile Include="..\src\csgshapenode.cpp" />
+    <ClCompile Include="..\src\csgtree.cpp" />
+    <ClCompile Include="..\src\csgunionoperation.cpp" />
     <ClCompile Include="..\src\cylinder.cpp" />
     <ClCompile Include="..\src\directedlight.cpp" />
     <ClCompile Include="..\src\inputparameters.cpp" />
@@ -107,8 +113,16 @@
     <ClCompile Include="..\src\triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\box.h" />
     <ClInclude Include="..\src\camera.h" />
     <ClInclude Include="..\src\cone.h" />
+    <ClInclude Include="..\src\csgbinaryoperationnode.h" />
+    <ClInclude Include="..\src\csgdifferenceoperation.h" />
+    <ClInclude Include="..\src\csgintersectionoperation.h" />
+    <ClInclude Include="..\src\csgnode.h" />
+    <ClInclude Include="..\src\csgshapenode.h" />
+    <ClInclude Include="..\src\csgtree.h" />
+    <ClInclude Include="..\src\csgunionoperation.h" />
     <ClInclude Include="..\src\cylinder.h" />
     <ClInclude Include="..\src\directedlight.h" />
     <ClInclude Include="..\src\inputparameters.h" />

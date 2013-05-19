@@ -28,26 +28,36 @@ RayIntersection Sphere::intersectWithRay(const Ray &ray) const {
 
   descriminant = sqrt(descriminant);
 
+  std::vector<float> intersectionDistances;
   float	closestRoot = -1.f;
 
   // Get closest root
   float root = -b - descriminant;
+  float rayExit = -1.f;
   if (root >= 0.f) {
     closestRoot = root;
+    intersectionDistances.push_back(root);
   }
 
   root = -b + descriminant;
   if (root >= 0.f) {
+    intersectionDistances.push_back(root);
     if (closestRoot < 0.f) {
       closestRoot = root;
     } else if (root < closestRoot) {
+      rayExit = closestRoot;
       closestRoot = root;
+    } else {
+      rayExit = root;
     }
   }
 
   if (closestRoot > 0.f) {
+    if (rayExit < 0.f) {
+      intersectionDistances.insert(intersectionDistances.begin(), 0.f);
+    }
     SpherePointer pointer = SpherePointer(new Sphere(*this));
-    return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot));
+    return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot), intersectionDistances);
   }
 
   return RayIntersection();

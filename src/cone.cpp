@@ -39,7 +39,9 @@ RayIntersection Cone::intersectWithRay(const Ray &ray) const {
   // Solve square equation a * x^2 + b * x + c = 0
   float a = u.dotProduct(u) - radiansPerDirection * radiansPerDirection;
   float closestRoot = -1.f;
+  float rayExit = -1.f;
   float root		= 0.f;
+  std::vector<float> intersectionDistances;
   
   if (fabs(a) > FLOAT_ZERO) {
     float b = 2 * (u.dotProduct(v) - w * radiansPerDirection);
@@ -59,6 +61,7 @@ RayIntersection Cone::intersectWithRay(const Ray &ray) const {
       Vector bottomCenterToPoint = point - mTop;
       Vector topToPoint = point - mBottomCenter;
       if (coneAxis.dotProduct(bottomCenterToPoint) > 0.0 && (-coneAxis).dotProduct(topToPoint) > 0.0) {
+        intersectionDistances.push_back(root);
         closestRoot = root;
       }
     }
@@ -69,10 +72,14 @@ RayIntersection Cone::intersectWithRay(const Ray &ray) const {
       Vector bottomCenterToPoint = point - mTop;
       Vector topToPoint = point - mBottomCenter;
       if (coneAxis.dotProduct(bottomCenterToPoint) > 0.0 && (-coneAxis).dotProduct(topToPoint) > 0.0) {
+        intersectionDistances.push_back(root);
         if (closestRoot < 0.0) {
           closestRoot = root;
         } else if (root < closestRoot) {
+          rayExit = closestRoot;
           closestRoot = root;
+        } else {
+          rayExit = root;
         }
       }
     }
@@ -81,8 +88,11 @@ RayIntersection Cone::intersectWithRay(const Ray &ray) const {
   // Intersection with bottom
   if (fabs(rayDirectionDotAxis) < FLOAT_ZERO) {
     if (closestRoot > 0.0) {
+      if (rayExit < 0.f) {
+        intersectionDistances.insert(intersectionDistances.begin(), 0.f);
+      }
       ConePointer pointer = ConePointer(new Cone(*this));
-      return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot));
+      return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot), intersectionDistances);
     }
 
     return RayIntersection();
@@ -95,17 +105,25 @@ RayIntersection Cone::intersectWithRay(const Ray &ray) const {
     Vector topToPoint = ray.getPointAt(root) - mBottomCenter;
     if (topToPoint.dotProduct(topToPoint) < mRadius * mRadius)
     {
+      intersectionDistances.push_back(root);
       if (closestRoot < 0.0) {
         closestRoot = root;
+        rayExit = root;
       } else if (root < closestRoot) {
+        rayExit = closestRoot;
         closestRoot = root;
+      } else {
+        rayExit = root;
       }
     }
   }
 
   if (closestRoot > 0.0) {
+    if (rayExit < 0.0) {
+      intersectionDistances.insert(intersectionDistances.begin(), 0.f);
+    }
     ConePointer pointer = ConePointer(new Cone(*this));
-    return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot));
+    return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot), intersectionDistances);
   }
 
   return RayIntersection();  

@@ -32,6 +32,9 @@ RayIntersection Cylinder::intersectWithRay(const Ray &ray) const {
   float a = u.dotProduct(u);
   float root		= 0.0;
   float closestRoot = -1.0;
+  float rayExit = -1.f;
+  std::vector<float> intersectionDistances;
+
   if (fabs(a) > FLOAT_ZERO) {
     const float b = 2 * u.dotProduct(v);
     const float c = v.dotProduct(v) - mRadius * mRadius;
@@ -54,6 +57,7 @@ RayIntersection Cylinder::intersectWithRay(const Ray &ray) const {
       Vector pointRelativelyToTopCenter		= point - mTopCenter;
       if (cylinderAxis.dotProduct(pointRelativelyToBottomCenter) > 0.0 && 
           cylinderAxis.dotProduct(pointRelativelyToTopCenter) < 0.0) {
+        intersectionDistances.push_back(root);
         closestRoot = root;
       }
     }
@@ -65,10 +69,14 @@ RayIntersection Cylinder::intersectWithRay(const Ray &ray) const {
       Vector pointRelativelyToTopCenter		= point - mTopCenter;
       if (cylinderAxis.dotProduct(pointRelativelyToBottomCenter) > 0.0 && 
           cylinderAxis.dotProduct(pointRelativelyToTopCenter) < 0.0) {
+        intersectionDistances.push_back(root);
         if (closestRoot < 0.0) {
           root = closestRoot;
         } else if (root < closestRoot) {
+          rayExit = closestRoot;
           closestRoot = root;
+        } else {
+          rayExit = root;
         }
       }
     }
@@ -78,8 +86,11 @@ RayIntersection Cylinder::intersectWithRay(const Ray &ray) const {
   float cyliderAxisDotDirection = cylinderAxis.dotProduct(rayDirection);
   if (fabs(cyliderAxisDotDirection) < FLOAT_ZERO) {
     if (closestRoot > 0.f) {
+      if (rayExit < 0.f) {
+        intersectionDistances.insert(intersectionDistances.begin(), 0.f);
+      }
       CylinderPointer pointer = CylinderPointer(new Cylinder(*this));
-      return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot));
+      return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot), intersectionDistances);
     }
 
     return RayIntersection();
@@ -92,10 +103,14 @@ RayIntersection Cylinder::intersectWithRay(const Ray &ray) const {
     Vector point = ray.getPointAt(root);    
     Vector pointRelativelyToBottomCenter = point - mBottomCenter;
     if (pointRelativelyToBottomCenter.dotProduct(pointRelativelyToBottomCenter) < mRadius * mRadius) {
+      intersectionDistances.push_back(root);
       if (closestRoot < 0.0) {
         closestRoot = root;
       } else if (root < closestRoot) {
+        rayExit = closestRoot;
         closestRoot = root;
+      } else {
+        rayExit = root;
       }
     }
   }
@@ -108,17 +123,24 @@ RayIntersection Cylinder::intersectWithRay(const Ray &ray) const {
     Vector point = ray.getPointAt(root);    
     Vector pointRelativelyToTopCenter = point - mTopCenter;
     if (pointRelativelyToTopCenter.dotProduct(pointRelativelyToTopCenter) < mRadius * mRadius) {
+      intersectionDistances.push_back(root);
       if (closestRoot < 0.0) {
         closestRoot = root;
       } else if (root < closestRoot) {
+        rayExit = closestRoot;
         closestRoot = root;
-      } 
+      } else {
+        rayExit = root;
+      }
     }
   }
 
   if (closestRoot >= 0.0) {
+    if (rayExit < 0.f) {
+      intersectionDistances.insert(intersectionDistances.begin(), 0.f);
+    }
     CylinderPointer pointer = CylinderPointer(new Cylinder(*this));
-    return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot));
+    return RayIntersection(true, pointer, closestRoot, getNormal(ray, closestRoot), intersectionDistances);
   }
   
   return RayIntersection();

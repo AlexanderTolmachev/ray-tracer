@@ -61,8 +61,10 @@ RayIntersection ModelTriangle::intersectWithRay(const Ray &ray) const {
     return RayIntersection();
   }
 
+  std::vector<float> intersectionDistances;
+  intersectionDistances.push_back(f);
   TrianglePointer pointer = TrianglePointer(new Triangle(*this));
-  return RayIntersection(true, pointer, f, getNormal(ray, f, lambda, mue));
+  return RayIntersection(true, pointer, f, getNormal(ray, f, lambda, mue), intersectionDistances);
 }
 
 
@@ -127,6 +129,7 @@ RayIntersection MeshModel::intersectWithRay(const Ray &ray) const {
   for each (auto triangle in mTriangles) {
     RayIntersection currentIntersection = triangle->intersectWithRay(ray);
     if (currentIntersection.rayIntersectsWithShape) {
+      closestIntersection.intersectionDistances.push_back(currentIntersection.distanceFromRayOrigin);
       if (currentIntersection.distanceFromRayOrigin < closestIntersection.distanceFromRayOrigin) {
         closestIntersection.rayIntersectsWithShape = true;
         closestIntersection.distanceFromRayOrigin = currentIntersection.distanceFromRayOrigin;

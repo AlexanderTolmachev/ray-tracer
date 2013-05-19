@@ -8,6 +8,9 @@
 
 #include "sceneloader.h"
 #include "objfilereader.h"
+#include "csgunionoperation.h"
+#include "csgintersectionoperation.h"
+#include "csgdifferenceoperation.h"
 
 /*
 * public:
@@ -85,6 +88,13 @@ ScenePointer SceneLoader::readScene(const QDomNode &rootNode) const {
         return ScenePointer(NULL);
       }
       scene->addShape(shape);
+    } else if (elementTagName == "csg") {
+      CSGTreePointer csgTree = readCSGTree(element);
+      if (csgTree == NULL) {
+        std::cerr << "Scene parsing error: failed CSG tree parameters reading" << std::endl;
+        return ScenePointer(NULL);
+      }
+      scene->addShape(csgTree);
     } else if (elementTagName == "background") {
       if (isBackgroundMaterialInitialized) {
         std::cerr << "Scene parsing error: 'background' tag occurred twice" << std::endl;
@@ -247,6 +257,9 @@ ShapePointer SceneLoader::readShape(const QDomElement &element) const {
   if (shapeType == "triangle") {
     return readTriangle(element, shapeMaterial);
   }
+  if (shapeType == "box") {
+    return readBox(element, shapeMaterial);
+  }
   if (shapeType == "model") {
     return readMeshModel(element, shapeMaterial);
   }
@@ -322,6 +335,18 @@ TrianglePointer SceneLoader::readTriangle(const QDomElement &element, MaterialPo
   return TrianglePointer(NULL);
 }
 
+BoxPointer SceneLoader::readBox(const QDomElement &element, MaterialPointer material) const {
+  Vector min;
+  Vector max;
+
+  if (readChildElementAsVector(element, "min", min) &&
+      readChildElementAsVector(element, "max", max)) {
+    return BoxPointer(new Box(min, max, material));
+  }
+
+  return BoxPointer(NULL);
+}
+
 MeshModelPointer SceneLoader::readMeshModel(const QDomElement &element, MaterialPointer material) const {
   Vector translation;
   Vector scale;
@@ -337,6 +362,80 @@ MeshModelPointer SceneLoader::readMeshModel(const QDomElement &element, Material
   return MeshModelPointer(NULL);
 }
 
+CSGTreePointer SceneLoader::readCSGTree(const QDomElement &element) const {
+  CSGNodePointer treeRoot = readCSGNode(element.firstChildElement());
+  
+  if (treeRoot != NULL) {
+    return CSGTreePointer(new CSGTree(treeRoot));
+  }
+
+  std::cerr << "Scene parsing error: failed CSG tree reading" << std::endl;
+  return CSGTreePointer(NULL);
+}
+
+CSGNodePointer SceneLoader::readCSGNode(const QDomElement &element) const {
+  if (element.isNull()) {
+    std::cerr << "Scene parsing error: no tags found for CSG tree node" << std::endl;
+    return CSGNodePointer(NULL);
+  }
+
+  if (element.tagName() == "operation") {
+    return readCSGOperationNode(element);
+  } else if (element.tagName() == "object") {
+    return readCSGShapeNode(element);
+  }
+
+  std::cerr << "Scene parsing error: unknown CSG node tag name '" << element.tagName().toUtf8().constData() << "'" << std::endl;
+  return CSGNodePointer(NULL);
+}
+
+CSGBinaryOperationNodePointer SceneLoader::readCSGOperationNode(const QDomElement &element) const {
+  QString operationType;
+  if (!readAttributeAsString(element, "type", operationType)) {
+    return CSGBinaryOperationNodePointer(NULL);
+  }
+  
+  QDomElement leftArgumentElement = element.firstChildElement("left");
+  if (leftArgumentElement.isNull()) {
+    std::cerr << "Scene parsing error: CSG operation has no left argument" << std::endl;
+    return CSGBinaryOperationNodePointer(NULL);
+  }
+  QDomElement rightArgumentElement = element.firstChildElement("right");
+  if (rightArgumentElement.isNull()) {
+    std::cerr << "Scene parsing error: CSG operation has no right argument" << std::endl;
+    return CSGBinaryOperationNodePointer(NULL);
+  }
+
+  CSGNodePointer leftArgument = readCSGNode(leftArgumentElement.firstChildElement());
+  CSGNodePointer rightArgument = readCSGNode(rightArgumentElement.firstChildElement());
+  if (leftArgument == NULL || rightArgument == NULL) {
+    return CSGBinaryOperationNodePointer(NULL);
+  }
+
+  if (operationType == "union") {
+    return CSGUnionOperationPointer(new CSGUnionOperation(leftArgument, rightArgument));
+  }
+  if (operationType == "intersection") {
+    return CSGIntersectionOperationPointer(new CSGIntersectionOperation(leftArgument, rightArgument));
+  }
+  if (operationType == "difference") {
+    return CSGDifferenceOperationPointer(new CSGDifferenceOperation(leftArgument, rightArgument));
+  }
+
+  std::cerr << "Scene parsing error: unknown CSG operation type '" << operationType.toUtf8().constData() << "'" << std::endl;
+  return CSGBinaryOperationNodePointer(NULL);
+}
+
+CSGShapeNodePointer SceneLoader::readCSGShapeNode(const QDomElement &element) const {
+  ShapePointer shape = readShape(element);
+
+  if (shape != NULL) {
+    return CSGShapeNodePointer(new CSGShapeNode(shape));
+  }
+
+  std::cerr << "Scene parsing error: failed shape parameters reading" << std::endl;
+  return CSGShapeNodePointer(NULL);
+}
 
 MaterialPointer SceneLoader::readMaterial(const QDomElement &element) const {
   QDomElement materialElement = element.firstChildElement("material");

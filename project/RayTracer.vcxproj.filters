@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Common">
       <UniqueIdentifier>{8f0df479-5e31-4375-8706-ac5fe5977a04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CSG">
+      <UniqueIdentifier>{f67bcf10-7d68-42d9-91d4-6a48e357549e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CSG">
+      <UniqueIdentifier>{83584ed0-aa4f-42db-bba1-70754afc97e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -104,6 +110,24 @@
     </ClCompile>
     <ClCompile Include="..\src\objfilereader.cpp">
       <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\csgtree.cpp">
+      <Filter>Source Files\CSG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\csgshapenode.cpp">
+      <Filter>Source Files\CSG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\csgunionoperation.cpp">
+      <Filter>Source Files\CSG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\csgintersectionoperation.cpp">
+      <Filter>Source Files\CSG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\csgdifferenceoperation.cpp">
+      <Filter>Source Files\CSG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\box.cpp">
+      <Filter>Source Files\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +196,36 @@
     </ClInclude>
     <ClInclude Include="..\src\objfilereader.h">
       <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\csgtree.h">
+      <Filter>Header Files\CSG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\csgnode.h">
+      <Filter>Source Files\CSG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\csgnode.cpp">
+      <Filter>Header Files\CSG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\csgnode.h">
+      <Filter>Header Files\CSG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\csgshapenode.h">
+      <Filter>Header Files\CSG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\csgbinaryoperationnode.h">
+      <Filter>Header Files\CSG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\csgunionoperation.h">
+      <Filter>Header Files\CSG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\csgintersectionoperation.h">
+      <Filter>Header Files\CSG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\csgdifferenceoperation.h">
+      <Filter>Header Files\CSG</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\box.h">
+      <Filter>Header Files\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
