@@ -260,6 +260,9 @@ ShapePointer SceneLoader::readShape(const QDomElement &element) const {
   if (shapeType == "box") {
     return readBox(element, shapeMaterial);
   }
+  if (shapeType == "torus") {
+    return readTorus(element, shapeMaterial);
+  }
   if (shapeType == "model") {
     return readMeshModel(element, shapeMaterial);
   }
@@ -345,6 +348,22 @@ BoxPointer SceneLoader::readBox(const QDomElement &element, MaterialPointer mate
   }
 
   return BoxPointer(NULL);
+}
+
+TorusPointer SceneLoader::readTorus(const QDomElement &element, MaterialPointer material) const {
+  Vector center;
+  Vector axis;
+  float innerRadius;
+  float outerRadius;
+
+  if (readChildElementAsVector(element, "center", center) &&
+      readChildElementAsVector(element, "axis", axis) &&
+      readChildElementAsFloat(element, "inner_radius", "r", innerRadius) &&
+      readChildElementAsFloat(element, "outer_radius", "r", outerRadius)) {
+    return TorusPointer(new Torus(center, axis, innerRadius, outerRadius, material));
+  }
+
+  return TorusPointer(NULL);
 }
 
 MeshModelPointer SceneLoader::readMeshModel(const QDomElement &element, MaterialPointer material) const {

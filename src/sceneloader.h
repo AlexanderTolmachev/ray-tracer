@@ -17,6 +17,7 @@
 #include "cone.h"
 #include "triangle.h"
 #include "box.h"
+#include "torus.h"
 #include "meshmodel.h"
 #include "csgtree.h"
 #include "csgbinaryoperationnode.h"
@@ -48,6 +49,7 @@ class SceneLoader {
     ConePointer readCone(const QDomElement &element, MaterialPointer material) const;
     TrianglePointer readTriangle(const QDomElement &element, MaterialPointer material) const;
     BoxPointer readBox(const QDomElement &element, MaterialPointer material) const;
+    TorusPointer readTorus(const QDomElement &element, MaterialPointer material) const;
     MeshModelPointer readMeshModel(const QDomElement &element, MaterialPointer material) const;
 
     CSGNodePointer readCSGNode(const QDomElement &element) const;

@@ -7,6 +7,7 @@ Torus::Torus(Vector center, Vector axis, float innerRadius, float outerRadius, M
     mAxis(axis),
     mInnerRadius(innerRadius),
     mOuterRadius(outerRadius) {
+  mAxis.normalize();
 }
 
 Torus::~Torus() {
