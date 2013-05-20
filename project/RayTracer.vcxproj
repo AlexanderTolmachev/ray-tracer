@@ -110,6 +110,7 @@
     <ClCompile Include="..\src\sceneloader.cpp" />
     <ClCompile Include="..\src\sphere.cpp" />
     <ClCompile Include="..\src\spotlight.cpp" />
+    <ClCompile Include="..\src\torus.cpp" />
     <ClCompile Include="..\src\triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="..\src\shape.h" />
     <ClInclude Include="..\src\sphere.h" />
     <ClInclude Include="..\src\spotlight.h" />
+    <ClInclude Include="..\src\torus.h" />
     <ClInclude Include="..\src\triangle.h" />
     <ClInclude Include="..\src\types.h" />
   </ItemGroup>

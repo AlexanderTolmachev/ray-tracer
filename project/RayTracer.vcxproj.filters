@@ -129,6 +129,9 @@
     <ClCompile Include="..\src\box.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\torus.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\raytracer.h">
@@ -203,9 +206,6 @@
     <ClInclude Include="..\src\csgnode.h">
       <Filter>Source Files\CSG</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\csgnode.cpp">
-      <Filter>Header Files\CSG</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\csgnode.h">
       <Filter>Header Files\CSG</Filter>
     </ClInclude>
@@ -225,6 +225,9 @@
       <Filter>Header Files\CSG</Filter>
     </ClInclude>
     <ClInclude Include="..\src\box.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\torus.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
