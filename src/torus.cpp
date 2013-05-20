@@ -71,7 +71,7 @@ RayIntersection Torus::intersectWithRay(const Ray &ray) const {
 }
 
 Vector Torus::getNormal(const Ray &ray, float distance) const {
-  Vector point = ray.getPointAt(distance);
+  Vector point = ray.getPointAt(distance);  
   Vector centerToPoint = point - mCenter;
   float	centerToPointDotAxis = centerToPoint.dotProduct(mAxis);
   Vector direction = centerToPoint - mAxis * centerToPointDotAxis;
