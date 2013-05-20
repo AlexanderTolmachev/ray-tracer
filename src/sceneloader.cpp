@@ -267,7 +267,6 @@ ShapePointer SceneLoader::readShape(const QDomElement &element) const {
     return readMeshModel(element, shapeMaterial);
   }
 
-  // TODO process others
   std::cerr << "Scene parsing error: unknown shape type '" << shapeType.toUtf8().constData() << "'" << std::endl;
   return ShapePointer(NULL);
 }

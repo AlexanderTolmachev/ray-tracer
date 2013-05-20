@@ -55,6 +55,12 @@
     <Filter Include="Source Files\CSG">
       <UniqueIdentifier>{83584ed0-aa4f-42db-bba1-70754afc97e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Lib">
+      <UniqueIdentifier>{2d16eb44-058a-4872-bb2a-4f64ff0cbda0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lib">
+      <UniqueIdentifier>{3b841946-06f1-4648-b4d2-47976fee914a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -131,6 +137,9 @@
     </ClCompile>
     <ClCompile Include="..\src\torus.cpp">
       <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\quarticsolver\src\quarticsolver.cpp">
+      <Filter>Source Files\Lib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="..\src\torus.h">
       <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\quarticsolver\src\quarticsolver.h">
+      <Filter>Header Files\Lib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
