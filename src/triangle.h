@@ -20,7 +20,7 @@ class Triangle : public Shape {
     virtual RayIntersection intersectWithRay(const Ray &ray) const;
     virtual Vector getNormal(const Ray &ray, float distance) const;
 
-protected:
+  protected:
     Vector mVertex0;
     Vector mVertex1;
     Vector mVertex2;
